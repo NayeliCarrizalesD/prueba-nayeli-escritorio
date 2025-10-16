@@ -112,9 +112,16 @@ function App() {
     return <Login onLogin={handleLogin} />
   }
 
-  // Si está autenticado pero no ha verificado datos, mostrar Home sin navbar
+  // Si está autenticado pero no ha verificado datos, mostrar Home con navbar
   if (isAuthenticated && !hasVerifiedData) {
-    return <Home userData={userData} onUserDataUpdate={handleUserDataUpdate} onDataVerified={handleDataVerification} onLogout={handleLogout} />
+    return (
+      <div className="App">
+        <Navbar onLogout={handleLogout} />
+        <main className="main-content">
+          <Home userData={userData} onUserDataUpdate={handleUserDataUpdate} onDataVerified={handleDataVerification} onLogout={handleLogout} />
+        </main>
+      </div>
+    )
   }
 
   // Si ha verificado datos, mostrar la aplicación con navbar

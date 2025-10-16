@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { FaUser, FaBirthdayCake, FaEnvelope, FaPhone, FaBriefcase, FaEdit, FaSave, FaTimes } from 'react-icons/fa'
 import Swal from 'sweetalert2'
-import Navbar from '../components/Navbar'
 
 function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
   const [localUserData, setLocalUserData] = useState(userData || {
@@ -52,7 +51,6 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
 
   return (
     <div className="home">
-      <Navbar onLogout={onLogout} />
       <div className="profile-container">
         <div className="welcome-section">
           <div className="avatar">
