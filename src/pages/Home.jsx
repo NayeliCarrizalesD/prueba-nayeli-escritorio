@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { FaUser, FaBirthdayCake, FaEnvelope, FaPhone, FaBriefcase, FaEdit, FaSave, FaTimes } from 'react-icons/fa'
+import { useState, useRef } from 'react'
+import { FaUser, FaBirthdayCake, FaEnvelope, FaPhone, FaBriefcase } from 'react-icons/fa'
 import Swal from 'sweetalert2'
 
 function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
@@ -11,36 +11,62 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
     workplace: "Desarrolladora Frontend React"
   })
 
-  const [isEditing, setIsEditing] = useState(false)
+  const [editingField, setEditingField] = useState(null)
+  const inputRefs = useRef({})
 
   const handleInputChange = (field, value) => {
-    setLocalUserData(prev => ({
-      ...prev,
+    const updatedData = {
+      ...localUserData,
       [field]: value
-    }))
-  }
-
-  const handleEditToggle = () => {
-    setIsEditing(!isEditing)
-  }
-
-  const handleSave = () => {
-    setIsEditing(false)
-    // Actualizar los datos del usuario globalmente
-    if (onUserDataUpdate) {
-      onUserDataUpdate(localUserData)
     }
-    console.log('Datos guardados:', localUserData)
+    setLocalUserData(updatedData)
     
-    Swal.fire({
-      title: '¡Datos guardados!',
-      text: 'Tu información ha sido actualizada correctamente.',
-      icon: 'success',
-      confirmButtonText: 'Entendido',
-      confirmButtonColor: '#FFD61B',
-      timer: 3000,
-      timerProgressBar: true
+    // Actualizar los datos del usuario globalmente de inmediato
+    if (onUserDataUpdate) {
+      onUserDataUpdate(updatedData)
+    }
+  }
+
+  const handleFieldClick = (field) => {
+    setEditingField(field)
+    // Enfocar el input después de un pequeño delay para que se renderice
+    setTimeout(() => {
+      if (inputRefs.current[field]) {
+        inputRefs.current[field].focus()
+      }
+    }, 50)
+  }
+
+  const handleInputBlur = (field) => {
+    setEditingField(null)
+    console.log(`Campo ${field} guardado automáticamente:`, localUserData[field])
+    
+    // Mostrar una notificación sutil de guardado
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
     })
+
+    Toast.fire({
+      icon: 'success',
+      title: 'Guardado automáticamente'
+    })
+  }
+
+  const handleKeyDown = (e, field) => {
+    if (e.key === 'Enter') {
+      handleInputBlur(field)
+    }
+    if (e.key === 'Escape') {
+      setEditingField(null)
+    }
   }
 
   const handleContinue = () => {
@@ -66,24 +92,8 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
 
         <div className="verification-section">
           <p className="parrafo verification-text">
-            Para comenzar, ayúdanos a verificar tus datos.
+            Para comenzar, ayúdanos a verificar tus datos. Haz clic en cualquier campo para editarlo.
           </p>
-          <div className="edit-actions">
-            {!isEditing ? (
-              <button className="edit-btn" onClick={handleEditToggle}>
-                <FaEdit /> Editar datos
-              </button>
-            ) : (
-              <div className="edit-controls">
-                <button className="save-btn" onClick={handleSave}>
-                  <FaSave /> Guardar
-                </button>
-                <button className="cancel-btn" onClick={handleEditToggle}>
-                  <FaTimes /> Cancelar
-                </button>
-              </div>
-            )}
-          </div>
         </div>
 
         <div className="user-data">
@@ -92,15 +102,23 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
               <span className="data-icon"><FaUser /></span>
               <div className="data-content">
                 <span className="h5 data-label">Nombre</span>
-                {isEditing ? (
+                {editingField === 'name' ? (
                   <input
+                    ref={(el) => inputRefs.current['name'] = el}
                     type="text"
                     className="data-input"
                     value={localUserData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
+                    onBlur={() => handleInputBlur('name')}
+                    onKeyDown={(e) => handleKeyDown(e, 'name')}
                   />
                 ) : (
-                  <span className="parrafo data-value">{localUserData.name}</span>
+                  <span 
+                    className="parrafo data-value editable-field" 
+                    onClick={() => handleFieldClick('name')}
+                  >
+                    {localUserData.name}
+                  </span>
                 )}
               </div>
             </div>
@@ -108,15 +126,23 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
               <span className="data-icon"><FaBirthdayCake /></span>
               <div className="data-content">
                 <span className="h5 data-label">Edad</span>
-                {isEditing ? (
+                {editingField === 'age' ? (
                   <input
+                    ref={(el) => inputRefs.current['age'] = el}
                     type="text"
                     className="data-input"
                     value={localUserData.age}
                     onChange={(e) => handleInputChange('age', e.target.value)}
+                    onBlur={() => handleInputBlur('age')}
+                    onKeyDown={(e) => handleKeyDown(e, 'age')}
                   />
                 ) : (
-                  <span className="parrafo data-value">{localUserData.age}</span>
+                  <span 
+                    className="parrafo data-value editable-field" 
+                    onClick={() => handleFieldClick('age')}
+                  >
+                    {localUserData.age}
+                  </span>
                 )}
               </div>
             </div>
@@ -127,15 +153,23 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
               <span className="data-icon"><FaEnvelope /></span>
               <div className="data-content">
                 <span className="h5 data-label">Correo electrónico</span>
-                {isEditing ? (
+                {editingField === 'email' ? (
                   <input
+                    ref={(el) => inputRefs.current['email'] = el}
                     type="email"
                     className="data-input"
                     value={localUserData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
+                    onBlur={() => handleInputBlur('email')}
+                    onKeyDown={(e) => handleKeyDown(e, 'email')}
                   />
                 ) : (
-                  <span className="parrafo data-value">{localUserData.email}</span>
+                  <span 
+                    className="parrafo data-value editable-field" 
+                    onClick={() => handleFieldClick('email')}
+                  >
+                    {localUserData.email}
+                  </span>
                 )}
               </div>
             </div>
@@ -143,15 +177,23 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
               <span className="data-icon"><FaPhone /></span>
               <div className="data-content">
                 <span className="h5 data-label">Teléfono celular</span>
-                {isEditing ? (
+                {editingField === 'phone' ? (
                   <input
+                    ref={(el) => inputRefs.current['phone'] = el}
                     type="tel"
                     className="data-input"
                     value={localUserData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
+                    onBlur={() => handleInputBlur('phone')}
+                    onKeyDown={(e) => handleKeyDown(e, 'phone')}
                   />
                 ) : (
-                  <span className="parrafo data-value">{localUserData.phone}</span>
+                  <span 
+                    className="parrafo data-value editable-field" 
+                    onClick={() => handleFieldClick('phone')}
+                  >
+                    {localUserData.phone}
+                  </span>
                 )}
               </div>
             </div>
@@ -162,15 +204,23 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
               <span className="data-icon"><FaBriefcase /></span>
               <div className="data-content">
                 <span className="h5 data-label">Lugar de trabajo</span>
-                {isEditing ? (
+                {editingField === 'workplace' ? (
                   <input
+                    ref={(el) => inputRefs.current['workplace'] = el}
                     type="text"
                     className="data-input"
                     value={localUserData.workplace}
                     onChange={(e) => handleInputChange('workplace', e.target.value)}
+                    onBlur={() => handleInputBlur('workplace')}
+                    onKeyDown={(e) => handleKeyDown(e, 'workplace')}
                   />
                 ) : (
-                  <span className="parrafo data-value highlighted">{localUserData.workplace}</span>
+                  <span 
+                    className="parrafo data-value highlighted editable-field" 
+                    onClick={() => handleFieldClick('workplace')}
+                  >
+                    {localUserData.workplace}
+                  </span>
                 )}
               </div>
             </div>
