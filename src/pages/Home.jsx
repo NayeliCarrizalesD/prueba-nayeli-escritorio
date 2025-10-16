@@ -87,7 +87,7 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
             </div>
             <div className="welcome-text">
               <span className="parrafo">¡Bienvenida</span>
-              <span className="h1">{localUserData.name}!</span>
+              <span className="h2">{localUserData.name}!</span>
             </div>
           </div>
         </div>
