@@ -83,6 +83,32 @@
     @media (max-width: 768px) {
       align-items: center;
     }
+    
+    // Texto "¡Bienvenida"
+    .parrafo {
+      width: 200px;
+      height: 73px;
+      display: flex;
+      align-items: center;
+      margin: 0;
+      
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+    }
+    
+    // Nombre del usuario
+    .h1 {
+      width: 200px;
+      height: 73px;
+      display: flex;
+      align-items: center;
+      margin: 0;
+      
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+    }
   }
 }
 
