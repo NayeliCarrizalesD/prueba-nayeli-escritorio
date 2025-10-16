@@ -4,9 +4,9 @@
 
 // Cuando Goals está dentro del main-content (con navbar)
 .main-content .goals-container {
-  min-height: calc(100vh - 80px); // Resta la altura del navbar
+  min-height: calc(100vh - 80px);
   background: white;
-  padding-top: 2rem; // Espacio entre navbar y contenido
+  padding-top: 0; // Sin padding superior para que pegue con la navbar
 }
 
 // Cuando Goals está como página completa (sin navbar)
@@ -15,39 +15,21 @@
   background: white;
 }
 
+// CONTENEDOR PRINCIPAL
 .goals-content {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.goals-header {
-  background: linear-gradient(135deg, #FFD61B 0%, #F7B733 100%);
+  background: transparent;
   padding: 2rem;
-  color: #333;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 }
 
-.user-info {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.user-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 3px solid white;
-  flex-shrink: 0;
-}
-
-.user-text h2 {
-  font-size: 1rem;
-  font-weight: 500;
+// SECCIÓN OBJETIVOS
+.objectives-section {
+  margin-bottom: 3rem;
   margin: 0 0 0.5rem 0;
   opacity: 0.8;
 }

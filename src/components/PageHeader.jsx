@@ -8,28 +8,16 @@ function PageHeader({
   indicators = []
 }) {
   return (
-    <div className="page-header">
-      <div className="user-info">
-        <div className="user-avatar-icon">
-          <FaUser />
+    <div className="welcome-section">
+      <div className="welcome-content">
+        <div className="avatar">
+          <div className="avatar-icon">
+            <FaUser />
+          </div>
         </div>
-        <div className="header-content">
-          <div className="user-text">
-            <h2>{title}</h2>
-            <h1>Hola, {userName}</h1>
-            <p>{description}</p>
-          </div>
-          
-          <div className="progress-indicators">
-            {indicators.map((indicator, index) => (
-              <div 
-                key={index} 
-                className={`indicator ${indicator.status || ''}`}
-              >
-                {indicator.icon}
-              </div>
-            ))}
-          </div>
+        <div className="welcome-text">
+          <div className="h3">¡Bienvenida</div>
+          <div className="h2">{userName}!</div>
         </div>
       </div>
     </div>
