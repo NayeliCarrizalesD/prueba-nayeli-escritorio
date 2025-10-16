@@ -56,7 +56,7 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
 
     Toast.fire({
       icon: 'success',
-      title: 'Guardado automáticamente'
+      title: 'Datos Guardados'
     })
   }
 
