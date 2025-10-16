@@ -4,7 +4,7 @@
 
 .home {
   min-height: 100vh;
-  background: white;
+  background: #F7F7F7; // Fondo gris para toda la página
   display: flex;
   flex-direction: column;
 }
@@ -108,9 +108,11 @@
 .profile-container {
   max-width: 900px;
   margin: 0 auto;
-  background: transparent;
+  background: white; // Fondo blanco para el contenido
   margin-top: 2rem;
   margin-bottom: 2rem;
+  border-radius: 8px; // Bordes redondeados
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // Sombra sutil
   
   @media (max-width: 768px) {
     margin: 1rem;

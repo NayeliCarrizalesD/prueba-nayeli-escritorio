@@ -5,8 +5,10 @@
 .navbar {
   background-color: $white;
   padding: $spacing-md 0;
-  box-shadow: $shadow-sm;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); // Sombra más prominente
   border-bottom: 1px solid $gray-200;
+  position: relative;
+  z-index: 10; // Asegurar que esté por encima del contenido
   
   .nav-container {
     width: 100%;
