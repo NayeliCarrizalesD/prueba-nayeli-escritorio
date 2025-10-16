@@ -4,7 +4,6 @@ import Navbar from './components/Navbar'
 import Login from './components/Login'
 import Goals from './pages/Goals'
 import Home from './pages/Home'
-import Nutrition from './pages/Nutrition'
 import Contact from './pages/Contact'
 import MedicalHistory from './pages/MedicalHistory'
 
@@ -140,7 +139,6 @@ function App() {
               <Nutrition onLogout={handleLogout} />
             )
           } />
-          <Route path="/nutrition" element={<Nutrition onLogout={handleLogout} />} />
           <Route path="/home" element={<Home userData={userData} onUserDataUpdate={handleUserDataUpdate} onDataVerified={handleDataVerificationFromRoute} onLogout={handleLogout} />} />
           <Route path="/goals" element={<Goals userName={userData.name} onComplete={handleGoalsComplete} onLogout={handleLogout} />} />
           <Route path="/medical-history" element={<MedicalHistory userName={userData.name} onComplete={handleMedicalHistoryComplete} onLogout={handleLogout} />} />

@@ -171,20 +171,20 @@
   }
   
   &.completed {
-    background: $success-color;
+    background: #2c2c2c;
     color: $white;
     @include shadow-hover(
-      0 4px 15px rgba($success-color, 0.3),
-      0 6px 20px rgba($success-color, 0.4)
+      0 4px 15px rgba(#2c2c2c, 0.3),
+      0 6px 20px rgba(#2c2c2c, 0.4)
     );
     
     &:hover {
-      background: $success-dark;
+      background: #1a1a1a;
     }
   }
   
   &.active {
-    background: $white;
+    background: transparent;
     @include shadow-hover($shadow-md, $shadow-lg);
     transform: scale(1.1);
   }

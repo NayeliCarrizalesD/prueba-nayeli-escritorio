@@ -342,3 +342,113 @@
     }
   }
 }
+
+// ==========================================================================
+// SECCIÓN DE PROGRESO GUARDADO
+// ==========================================================================
+
+.progress-section {
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+
+  .progress-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+
+    .progress-icon {
+      color: #28a745;
+      font-size: 1.2rem;
+    }
+
+    .h4 {
+      font-family: var(--unnamed-font-family-proxima-nova);
+      font-weight: var(--unnamed-font-weight-bold);
+      font-size: var(--unnamed-font-size-18);
+      color: var(--unnamed-color-3e3e3e);
+      margin: 0;
+    }
+  }
+
+  .progress-content {
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background-color: #e9ecef;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #FFD61B 0%, #F7B733 100%);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+    }
+
+    .progress-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .progress-text {
+        font-family: var(--unnamed-font-family-proxima-nova);
+        font-weight: var(--unnamed-font-weight-bold);
+        font-size: var(--unnamed-font-size-14);
+        color: var(--unnamed-color-3e3e3e);
+      }
+
+      .last-saved {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-family: var(--unnamed-font-family-proxima-nova);
+        font-size: var(--unnamed-font-size-12);
+        color: #6c757d;
+
+        .clock-icon {
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .saved-sections {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .saved-badge {
+        background: #28a745;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-family: var(--unnamed-font-family-proxima-nova);
+        font-size: var(--unnamed-font-size-12);
+        font-weight: var(--unnamed-font-weight-bold);
+        white-space: nowrap;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    margin: 1rem 0;
+
+    .progress-details {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .saved-sections {
+      justify-content: center;
+    }
+  }
+}

@@ -11,7 +11,7 @@ function Navbar({ onLogout }) {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <Link to="/" className="nav-logo">
+        <Link to="/home" className="nav-logo">
           <img 
             src="/logo.png" 
             alt="Salinas Logo" 

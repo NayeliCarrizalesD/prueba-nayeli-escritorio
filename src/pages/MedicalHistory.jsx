@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 import PageHeader from '../components/PageHeader'
 import { 
   FaChartBar, 
@@ -10,7 +13,10 @@ import {
 } from 'react-icons/fa'
 
 function MedicalHistory({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
-  const [medicalData, setMedicalData] = useState({
+  const navigate = useNavigate()
+  
+  // Usar hook personalizado para persistencia automática
+  const [medicalData, setMedicalData] = useLocalStorage('medicalHistory', {
     hasDisease: '',
     diseaseDescription: '',
     hasAllergy: '',
@@ -30,6 +36,11 @@ function MedicalHistory({ userName = "Nayeli Carrizales", onComplete, onLogout }
     hasMedicalStudies: '',
     studiesDescription: ''
   })
+
+  // Guardar timestamp cuando se actualicen los datos
+  useEffect(() => {
+    localStorage.setItem('medicalHistory_timestamp', Date.now().toString())
+  }, [medicalData])
 
   const [currentStep, setCurrentStep] = useState(1)
 
@@ -71,150 +82,179 @@ function MedicalHistory({ userName = "Nayeli Carrizales", onComplete, onLogout }
     }))
   }
 
-  const handleContinue = () => {
-    // Guardar datos del historial médico
-    localStorage.setItem('medicalHistory', JSON.stringify(medicalData))
-    console.log('Historial médico guardado:', medicalData)
+  const handleSaveProgress = () => {
+    // Los datos ya se guardan automáticamente con el hook
+    const now = new Date()
+    const timeString = now.toLocaleTimeString('es-ES', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    })
     
-    // Llamar a la función onComplete para continuar al siguiente paso
-    if (onComplete) {
-      onComplete()
-    }
+    Swal.fire({
+      title: '¡Progreso guardado!',
+      text: `Tu historial médico ha sido guardado correctamente. Puedes continuar más tarde desde donde lo dejaste.`,
+      icon: 'success',
+      confirmButtonText: 'Continuar',
+      confirmButtonColor: '#FFD61B',
+      background: '#fff',
+      color: '#3e3e3e',
+      customClass: {
+        confirmButton: 'swal-confirm-btn'
+      }
+    })
+  }
+
+  const handleContinue = () => {
+    // Los datos ya se guardan automáticamente con el hook
+    console.log('Historial médico completado:', medicalData)
+    
+    // Navegar a la página Home
+    navigate('/')
   }
 
   return (
-    <div className="medical-history-container">
-      <div className="medical-history-content">
-        <PageHeader 
-          title="Historial médico"
-          userName={userName}
-          description="Para brindarte una mejor atención, contesta las siguientes preguntas. La información es confidencial y esencial para crear tu perfil y que recibas la mejor atención."
-          indicators={progressIndicators} 
-        />
+    <div className="goals-container">
+      <div className="goals-content">
+        <PageHeader userName={userName} indicators={progressIndicators} />
 
         <div className="medical-form">
           <div className="section">
             <h3><FaHeart style={{ marginRight: '8px' }} />Historial médico</h3>
 
           <div className="questions-grid">
-            {/* Pregunta 1: Enfermedades */}
-            <div className="question-block">
-              <h3>¿Padeces alguna enfermedad o afectación médica?</h3>
-              <div className="radio-group">
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasDisease"
-                    value="Si"
-                    checked={medicalData.hasDisease === 'Si'}
-                    onChange={(e) => handleInputChange('hasDisease', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  Sí
-                </label>
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasDisease"
-                    value="No"
-                    checked={medicalData.hasDisease === 'No'}
-                    onChange={(e) => handleInputChange('hasDisease', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  No
-                </label>
-              </div>
-            </div>
-
-            {/* Pregunta 2: Alergias */}
-            <div className="question-block">
-              <h3>¿Tienes alguna alergia?</h3>
-              <div className="radio-group">
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasAllergy"
-                    value="Si"
-                    checked={medicalData.hasAllergy === 'Si'}
-                    onChange={(e) => handleInputChange('hasAllergy', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  Sí
-                </label>
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasAllergy"
-                    value="No"
-                    checked={medicalData.hasAllergy === 'No'}
-                    onChange={(e) => handleInputChange('hasAllergy', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  No
-                </label>
-              </div>
-              {medicalData.hasAllergy === 'Si' && (
-                <div className="description-input">
-                  <input
-                    type="text"
-                    placeholder="Fresas, nuez moscada y mariscos."
-                    value={medicalData.allergyDescription}
-                    onChange={(e) => handleInputChange('allergyDescription', e.target.value)}
-                    className="allergy-description"
-                  />
+            {/* Primera fila: 3 preguntas principales */}
+            <div className="questions-row">
+              {/* Pregunta 1: Enfermedades */}
+              <div className="question-item">
+                <h3 className="h4">¿Padeces alguna enfermedad o afectación médica?</h3>
+                <div className="radio-group">
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasDisease"
+                      value="Si"
+                      checked={medicalData.hasDisease === 'Si'}
+                      onChange={(e) => handleInputChange('hasDisease', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">Sí</span>
+                  </label>
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasDisease"
+                      value="No"
+                      checked={medicalData.hasDisease === 'No'}
+                      onChange={(e) => handleInputChange('hasDisease', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">No</span>
+                  </label>
                 </div>
-              )}
-            </div>
-
-            {/* Pregunta 3: Cirugías */}
-            <div className="question-block">
-              <h3>¿Te han hecho alguna cirugía?</h3>
-              <div className="radio-group">
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasSurgery"
-                    value="Si"
-                    checked={medicalData.hasSurgery === 'Si'}
-                    onChange={(e) => handleInputChange('hasSurgery', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  Sí
-                </label>
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasSurgery"
-                    value="No"
-                    checked={medicalData.hasSurgery === 'No'}
-                    onChange={(e) => handleInputChange('hasSurgery', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  No
-                </label>
-              </div>
-              {medicalData.hasSurgery === 'Si' && (
-                <div className="surgery-details">
+                {medicalData.hasDisease === 'Si' && (
                   <div className="description-input">
                     <input
                       type="text"
-                      placeholder="Miomectomía"
-                      value={medicalData.surgeryDescription}
-                      onChange={(e) => handleInputChange('surgeryDescription', e.target.value)}
-                      className="surgery-description"
+                      placeholder="Fresas, nuez moscada y mariscos."
+                      value={medicalData.diseaseDescription}
+                      onChange={(e) => handleInputChange('diseaseDescription', e.target.value)}
+                      className="disease-description"
                     />
                   </div>
-                  <div className="date-input">
-                    <label>Fecha</label>
+                )}
+              </div>
+
+              {/* Pregunta 2: Alergias */}
+              <div className="question-item">
+                <h3 className="h4">¿Tienes alguna alergia?</h3>
+                <div className="radio-group">
+                  <label className="radio-option">
                     <input
-                      type="date"
-                      value={medicalData.surgeryDate}
-                      onChange={(e) => handleInputChange('surgeryDate', e.target.value)}
-                      className="surgery-date"
+                      type="radio"
+                      name="hasAllergy"
+                      value="Si"
+                      checked={medicalData.hasAllergy === 'Si'}
+                      onChange={(e) => handleInputChange('hasAllergy', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">Sí</span>
+                  </label>
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasAllergy"
+                      value="No"
+                      checked={medicalData.hasAllergy === 'No'}
+                      onChange={(e) => handleInputChange('hasAllergy', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">No</span>
+                  </label>
+                </div>
+                {medicalData.hasAllergy === 'Si' && (
+                  <div className="description-input">
+                    <input
+                      type="text"
+                      placeholder="Fresas, nuez moscada y mariscos."
+                      value={medicalData.allergyDescription}
+                      onChange={(e) => handleInputChange('allergyDescription', e.target.value)}
+                      className="allergy-description"
                     />
                   </div>
+                )}
+              </div>
+
+              {/* Pregunta 3: Cirugías */}
+              <div className="question-item">
+                <h3 className="h4">¿Te han hecho alguna cirugía?</h3>
+                <div className="radio-group">
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasSurgery"
+                      value="Si"
+                      checked={medicalData.hasSurgery === 'Si'}
+                      onChange={(e) => handleInputChange('hasSurgery', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">Sí</span>
+                  </label>
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasSurgery"
+                      value="No"
+                      checked={medicalData.hasSurgery === 'No'}
+                      onChange={(e) => handleInputChange('hasSurgery', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">No</span>
+                  </label>
                 </div>
-              )}
+                {medicalData.hasSurgery === 'Si' && (
+                  <div className="surgery-details">
+                    <div className="description-input">
+                      <input
+                        type="text"
+                        placeholder="Miomectomía"
+                        value={medicalData.surgeryDescription}
+                        onChange={(e) => handleInputChange('surgeryDescription', e.target.value)}
+                        className="surgery-description"
+                      />
+                      <small className="parrafo">Miomectomía</small>
+                      <div className="date-input">
+                        <input
+                          type="date"
+                          value={medicalData.surgeryDate}
+                          onChange={(e) => handleInputChange('surgeryDate', e.target.value)}
+                          className="surgery-date"
+                        />
+                        <small className="parrafo">Fecha</small>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Pregunta 4: Historial Familiar */}
@@ -261,216 +301,209 @@ function MedicalHistory({ userName = "Nayeli Carrizales", onComplete, onLogout }
                   onClick={addFamilyHistory}
                   className="add-family-btn"
                 >
-                  ➕ Agregar otro familiar
+                  <div className="plus-icon">+</div>
+                  <span className="btn-text">Agregar otro familiar</span>
                 </button>
               </div>
             </div>
 
-            {/* Pregunta 5: Dietas */}
-            <div className="question-block">
-              <h3>¿Has hecho dieta para bajar de peso?</h3>
-              <div className="radio-group">
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasDiet"
-                    value="Si"
-                    checked={medicalData.hasDiet === 'Si'}
-                    onChange={(e) => handleInputChange('hasDiet', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  Sí
-                </label>
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasDiet"
-                    value="No"
-                    checked={medicalData.hasDiet === 'No'}
-                    onChange={(e) => handleInputChange('hasDiet', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  No
-                </label>
+            {/* Segunda fila: 3 preguntas */}
+            <div className="questions-row">
+              {/* Pregunta 5: Dietas */}
+              <div className="question-item">
+                <h3 className="h4">¿Has hecho dieta para bajar de peso?</h3>
+                <div className="radio-group">
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasDiet"
+                      value="Si"
+                      checked={medicalData.hasDiet === 'Si'}
+                      onChange={(e) => handleInputChange('hasDiet', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">Sí</span>
+                  </label>
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasDiet"
+                      value="No"
+                      checked={medicalData.hasDiet === 'No'}
+                      onChange={(e) => handleInputChange('hasDiet', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">No</span>
+                  </label>
+                </div>
               </div>
-            </div>
 
-            {/* Pregunta 6: Medicamentos */}
-            <div className="question-block">
-              <h3>¿Has tomado medicamentos para bajar de peso?</h3>
-              <div className="radio-group">
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasMedication"
-                    value="Si"
-                    checked={medicalData.hasMedication === 'Si'}
-                    onChange={(e) => handleInputChange('hasMedication', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  Sí
-                </label>
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasMedication"
-                    value="No"
-                    checked={medicalData.hasMedication === 'No'}
-                    onChange={(e) => handleInputChange('hasMedication', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  No
-                </label>
+              {/* Pregunta 6: Medicamentos */}
+              <div className="question-item">
+                <h3 className="h4">¿Has tomado medicamentos para bajar de peso?</h3>
+                <div className="radio-group">
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasMedication"
+                      value="Si"
+                      checked={medicalData.hasMedication === 'Si'}
+                      onChange={(e) => handleInputChange('hasMedication', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">Sí</span>
+                  </label>
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasMedication"
+                      value="No"
+                      checked={medicalData.hasMedication === 'No'}
+                      onChange={(e) => handleInputChange('hasMedication', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">No</span>
+                  </label>
+                </div>
               </div>
-            </div>
 
-            {/* Pregunta 7: Tratamientos Reductivos */}
-            <div className="question-block">
-              <h3>¿Has tomado tratamientos reductivos anteriormente?</h3>
-              <div className="radio-group">
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasReductiveTreatment"
-                    value="Si"
-                    checked={medicalData.hasReductiveTreatment === 'Si'}
-                    onChange={(e) => handleInputChange('hasReductiveTreatment', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  Sí
-                </label>
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasReductiveTreatment"
-                    value="No"
-                    checked={medicalData.hasReductiveTreatment === 'No'}
-                    onChange={(e) => handleInputChange('hasReductiveTreatment', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  No
-                </label>
-              </div>
-              {medicalData.hasReductiveTreatment === 'Si' && (
-                <div className="treatment-details">
-                  <div className="time-options">
-                    <label className="time-option">
-                      <input
-                        type="radio"
-                        name="treatmentDuration"
-                        value="Cavitación"
-                        checked={medicalData.treatmentDuration === 'Cavitación'}
-                        onChange={(e) => handleInputChange('treatmentDuration', e.target.value)}
-                      />
-                      <span>ej. Cavitación</span>
-                    </label>
-                    <label className="time-option">
-                      <input
-                        type="radio"
-                        name="treatmentDuration"
-                        value="6 meses"
-                        checked={medicalData.treatmentDuration === '6 meses'}
-                        onChange={(e) => handleInputChange('treatmentDuration', e.target.value)}
-                      />
-                      <span>ej. 6 meses</span>
-                    </label>
+              {/* Pregunta 7: Tratamientos Reductivos */}
+              <div className="question-item">
+                <h3 className="h4">¿Has tomado tratamientos reductivos anteriormente?</h3>
+                <div className="radio-group">
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasReductiveTreatment"
+                      value="Si"
+                      checked={medicalData.hasReductiveTreatment === 'Si'}
+                      onChange={(e) => handleInputChange('hasReductiveTreatment', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">Sí</span>
+                  </label>
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasReductiveTreatment"
+                      value="No"
+                      checked={medicalData.hasReductiveTreatment === 'No'}
+                      onChange={(e) => handleInputChange('hasReductiveTreatment', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">No</span>
+                  </label>
+                </div>
+                {medicalData.hasReductiveTreatment === 'Si' && (
+                  <div className="description-input">
+                    <input
+                      type="text"
+                      placeholder="ej. Cavitación"
+                      value={medicalData.treatmentDuration}
+                      onChange={(e) => handleInputChange('treatmentDuration', e.target.value)}
+                      className="treatment-description"
+                    />
+                    <small className="parrafo">Tipo de tratamiento</small>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
 
-            {/* Pregunta 8: Suplementos */}
-            <div className="question-block">
-              <h3>¿Utilizas algún suplemento o tomas vitaminas de manera regular?</h3>
-              <div className="radio-group">
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasSupplements"
-                    value="Si"
-                    checked={medicalData.hasSupplements === 'Si'}
-                    onChange={(e) => handleInputChange('hasSupplements', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  Sí
-                </label>
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasSupplements"
-                    value="No"
-                    checked={medicalData.hasSupplements === 'No'}
-                    onChange={(e) => handleInputChange('hasSupplements', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  No
-                </label>
-              </div>
-              {medicalData.hasSupplements === 'Si' && (
-                <div className="description-input">
-                  <input
-                    type="text"
-                    placeholder="ej. Vitamina B, Proteínas"
-                    value={medicalData.supplementsDescription}
-                    onChange={(e) => handleInputChange('supplementsDescription', e.target.value)}
-                    className="supplements-description"
-                  />
-                  <small>¿Cuál?</small>
+            {/* Tercera fila: 2 preguntas */}
+            <div className="questions-row">
+              {/* Pregunta 8: Suplementos */}
+              <div className="question-item">
+                <h3 className="h4">¿Utilizas algún suplemento o tomas vitaminas de manera regular?</h3>
+                <div className="radio-group">
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasSupplements"
+                      value="Si"
+                      checked={medicalData.hasSupplements === 'Si'}
+                      onChange={(e) => handleInputChange('hasSupplements', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">Sí</span>
+                  </label>
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasSupplements"
+                      value="No"
+                      checked={medicalData.hasSupplements === 'No'}
+                      onChange={(e) => handleInputChange('hasSupplements', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">No</span>
+                  </label>
                 </div>
-              )}
-            </div>
-
-            {/* Pregunta 9: Estudios Médicos */}
-            <div className="question-block">
-              <h3>¿Te has realizado estudios médicos recientes?</h3>
-              <div className="radio-group">
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasMedicalStudies"
-                    value="Si"
-                    checked={medicalData.hasMedicalStudies === 'Si'}
-                    onChange={(e) => handleInputChange('hasMedicalStudies', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  Sí
-                </label>
-                <label className="radio-option">
-                  <input
-                    type="radio"
-                    name="hasMedicalStudies"
-                    value="No"
-                    checked={medicalData.hasMedicalStudies === 'No'}
-                    onChange={(e) => handleInputChange('hasMedicalStudies', e.target.value)}
-                  />
-                  <span className="radio-custom"></span>
-                  No
-                </label>
-              </div>
-              {medicalData.hasMedicalStudies === 'Si' && (
-                <div className="description-input">
-                  <input
-                    type="text"
-                    placeholder="ej. Química Sanguínea, Hemoglobina, etc."
-                    value={medicalData.studiesDescription}
-                    onChange={(e) => handleInputChange('studiesDescription', e.target.value)}
-                    className="studies-description"
-                  />
-                  <small>¿Qué tipo de estudio médico?</small>
-                  <div className="file-upload-section">
-                    <button type="button" className="upload-btn">
-                      📎 Adjuntar archivo
-                    </button>
+                {medicalData.hasSupplements === 'Si' && (
+                  <div className="description-input">
+                    <input
+                      type="text"
+                      placeholder="ej. Vitamina B, Proteínas"
+                      value={medicalData.supplementsDescription}
+                      onChange={(e) => handleInputChange('supplementsDescription', e.target.value)}
+                      className="supplements-description"
+                    />
+                    <small className="parrafo">¿Cuál?</small>
                   </div>
+                )}
+              </div>
+
+              {/* Pregunta 9: Estudios Médicos */}
+              <div className="question-item">
+                <h3 className="h4">¿Te has realizado estudios médicos recientes?</h3>
+                <div className="radio-group">
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasMedicalStudies"
+                      value="Si"
+                      checked={medicalData.hasMedicalStudies === 'Si'}
+                      onChange={(e) => handleInputChange('hasMedicalStudies', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">Sí</span>
+                  </label>
+                  <label className="radio-option">
+                    <input
+                      type="radio"
+                      name="hasMedicalStudies"
+                      value="No"
+                      checked={medicalData.hasMedicalStudies === 'No'}
+                      onChange={(e) => handleInputChange('hasMedicalStudies', e.target.value)}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="parrafo">No</span>
+                  </label>
                 </div>
-              )}
+                {medicalData.hasMedicalStudies === 'Si' && (
+                  <div className="description-input">
+                    <input
+                      type="text"
+                      placeholder="ej. Química Sanguínea, Hemoglobina, etc."
+                      value={medicalData.studiesDescription}
+                      onChange={(e) => handleInputChange('studiesDescription', e.target.value)}
+                      className="studies-description"
+                    />
+                    <small className="parrafo">¿Qué tipo de estudio médico?</small>
+                    <div className="file-upload-section">
+                      <button type="button" className="upload-btn">
+                        📎 Adjuntar archivo
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
           <div className="form-actions">
             <div className="save-progress">
               <span>Deseo continuar después.</span>
-              <button type="button" className="save-btn">
+              <button type="button" onClick={handleSaveProgress} className="save-btn">
                 <FaSave style={{ marginRight: '8px' }} />
                 Guardar mi avance
               </button>

@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 import PageHeader from '../components/PageHeader'
 import { 
   FaWeight, 
@@ -16,7 +18,9 @@ import {
 
 function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({
+  
+  // Usar hook personalizado para persistencia automática
+  const [formData, setFormData] = useLocalStorage('userGoals', {
     currentWeight: '72.0',
     height: '',
     idealWeight: '',
@@ -24,6 +28,11 @@ function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
     minWeight: '',
     maxWeight: ''
   })
+
+  // Guardar timestamp cuando se actualicen los datos
+  useEffect(() => {
+    localStorage.setItem('userGoals_timestamp', Date.now().toString())
+  }, [formData])
 
   const goals = [
     { id: 'weightLoss', label: 'Pérdida de peso', icon: <FaWeight /> },
@@ -70,8 +79,25 @@ function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
   }
 
   const handleSaveProgress = () => {
-    localStorage.setItem('userGoals', JSON.stringify(formData))
-    alert('Progreso guardado correctamente')
+    // Los datos ya se guardan automáticamente con el hook
+    const now = new Date()
+    const timeString = now.toLocaleTimeString('es-ES', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    })
+    
+    Swal.fire({
+      title: '¡Progreso guardado!',
+      text: `Tu información ha sido guardada correctamente a las ${timeString}. Puedes continuar más tarde desde donde lo dejaste.`,
+      icon: 'success',
+      confirmButtonText: 'Continuar',
+      confirmButtonColor: '#FFD61B',
+      background: '#fff',
+      color: '#3e3e3e',
+      customClass: {
+        confirmButton: 'swal-confirm-btn'
+      }
+    })
   }
 
   return (
@@ -190,9 +216,13 @@ function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
               </button>
             </div>
             
-            <button type="submit" className="continue-btn">
-              Continuar
-            </button>
+            <div className='action-section'>
+              <button type="submit" className="continue-btn">
+                Continuar
+              </button>
+
+            </div>
+ 
           </div>
         </form>
       </div>

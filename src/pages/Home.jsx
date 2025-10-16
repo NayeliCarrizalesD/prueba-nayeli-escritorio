@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react'
-import { FaUser, FaBirthdayCake, FaEnvelope, FaPhone, FaBriefcase } from 'react-icons/fa'
+import { FaUser, FaBirthdayCake, FaEnvelope, FaPhone, FaBriefcase, FaCheckCircle, FaClock } from 'react-icons/fa'
 import Swal from 'sweetalert2'
+import { useProgressInfo } from '../hooks/useLocalStorage'
 
 function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
+  const progressInfo = useProgressInfo()
   const [localUserData, setLocalUserData] = useState(userData || {
     name: "Nayeli Carrizales",
     age: "22 años",
@@ -97,6 +99,46 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
             Para comenzar, ayúdanos a verificar tus datos. Haz clic en cualquier campo para editarlo.
           </p>
         </div>
+
+        {/* Sección de progreso guardado */}
+        {progressInfo.hasProgress && (
+          <div className="progress-section">
+            <div className="progress-header">
+              <FaCheckCircle className="progress-icon" />
+              <span className="h4">Progreso guardado localmente</span>
+            </div>
+            <div className="progress-content">
+              <div className="progress-bar">
+                <div 
+                  className="progress-fill" 
+                  style={{ width: `${progressInfo.progressPercentage}%` }}
+                />
+              </div>
+              <div className="progress-details">
+                <span className="progress-text">
+                  {progressInfo.progressPercentage}% completado
+                </span>
+                {progressInfo.lastSaved && (
+                  <span className="last-saved">
+                    <FaClock className="clock-icon" />
+                    Última vez: {progressInfo.lastSaved.toLocaleString('es-ES')}
+                  </span>
+                )}
+              </div>
+              <div className="saved-sections">
+                {progressInfo.userGoals && (
+                  <span className="saved-badge">Objetivos ✓</span>
+                )}
+                {progressInfo.medicalHistory && (
+                  <span className="saved-badge">Historial médico ✓</span>
+                )}
+                {progressInfo.nutritionData && (
+                  <span className="saved-badge">Nutrición ✓</span>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="user-data">
           <div className="data-row">

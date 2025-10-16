@@ -1,0 +1,395 @@
+// ==========================================================================
+// PÁGINA: GOALS - NUEVO DISEÑO CON VARIABLES CSS
+// ==========================================================================
+
+// Cuando Goals está dentro del main-content (con navbar)
+.main-content .goals-container {
+  min-height: calc(100vh - 80px);
+  background: white;
+  padding-top: 2rem;
+}
+
+// Cuando Goals está como página completa (sin navbar)
+.goals-container {
+  min-height: 100vh;
+  background: white;
+}
+
+// SECCIÓN DE BIENVENIDA SIMILAR A HOME
+.goals-welcome-section {
+  display: flex;
+  align-items: center;
+  padding: 3rem 1rem 3rem 0;
+  margin-top: -30px;
+  background-color: #F7F7F7;
+  margin-left: -100vw;
+  margin-right: -100vw;
+  padding-left: 100vw;
+  padding-right: 100vw;
+  
+  .welcome-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+      padding: 0 1rem;
+    }
+  }
+  
+  .avatar {
+    margin-right: 2rem;
+    
+    @media (max-width: 768px) {
+      margin-right: 0;
+      margin-bottom: 1.5rem;
+    }
+    
+    .avatar-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFD61B 0%, #F7B733 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #333;
+      box-shadow: 0 4px 15px rgba(255, 214, 27, 0.3);
+    }
+  }
+  
+  .welcome-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 73px;
+    justify-content: center;
+    width: 300px;
+    
+    @media (max-width: 768px) {
+      align-items: center;
+    }
+    
+    // Texto "Nutrición"
+    .h3 {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin: 0;
+      font-family: var(--unnamed-font-family-proxima-nova);
+      font-style: var(--unnamed-font-style-normal);
+      font-weight: var(--unnamed-font-weight-bold);
+      font-size: var(--unnamed-font-size-24);
+      line-height: var(--unnamed-line-spacing-32);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      color: var(--unnamed-color-3e3e3e);
+      
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+    }
+    
+    // Nombre del usuario
+    .h1 {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin: 0;
+      font-family: var(--unnamed-font-family-proxima-nova);
+      font-style: var(--unnamed-font-style-normal);
+      font-weight: var(--unnamed-font-weight-bold);
+      font-size: var(--unnamed-font-size-54);
+      line-height: var(--unnamed-line-spacing-64);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      color: var(--unnamed-color-3e3e3e);
+      
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+  }
+}
+
+// CONTENEDOR PRINCIPAL
+.goals-content {
+  max-width: 900px;
+  margin: 0 auto;
+  background: transparent;
+  padding: 2rem;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+}
+
+// SECCIÓN OBJETIVOS
+.objectives-section {
+  margin-bottom: 3rem;
+  
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    font-family: var(--unnamed-font-family-proxima-nova);
+    font-style: var(--unnamed-font-style-normal);
+    font-weight: var(--unnamed-font-weight-bold);
+    font-size: var(--unnamed-font-size-24);
+    line-height: var(--unnamed-line-spacing-32);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-3e3e3e);
+    
+    .icon {
+      color: #FFD61B;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+// PREGUNTAS DE PESO
+.weight-questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.question-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-family: var(--unnamed-font-family-proxima-nova);
+    font-style: var(--unnamed-font-style-normal);
+    font-weight: var(--unnamed-font-weight-bold);
+    font-size: var(--unnamed-font-size-16);
+    line-height: var(--unnamed-line-spacing-22);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-3e3e3e);
+  }
+  
+  .input-with-unit {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+      width: 100%;
+      padding: 0.8rem 2.5rem 0.8rem 0.8rem;
+      border: none;
+      border-bottom: 2px solid #FFD61B;
+      background: transparent;
+      font-family: var(--unnamed-font-family-proxima-nova);
+      font-style: var(--unnamed-font-style-normal);
+      font-weight: var(--unnamed-font-weight-bold);
+      font-size: var(--unnamed-font-size-16);
+      line-height: var(--unnamed-line-spacing-22);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      color: var(--unnamed-color-3e3e3e);
+
+      &:focus {
+        outline: none;
+        border-bottom-color: #F7B733;
+      }
+      
+      &::placeholder {
+        color: rgba(62, 62, 62, 0.5);
+      }
+    }
+
+    .unit {
+      position: absolute;
+      right: 0.8rem;
+      font-family: var(--unnamed-font-family-proxima-nova);
+      font-style: var(--unnamed-font-style-normal);
+      font-weight: var(--unnamed-font-weight-bold);
+      font-size: var(--unnamed-font-size-11);
+      line-height: var(--unnamed-line-spacing-32);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      color: var(--unnamed-color-3e3e3e);
+    }
+  }
+}
+
+// SELECCIÓN DE OBJETIVOS
+.goal-selection {
+  margin-bottom: 3rem;
+
+  .question-label {
+    display: block;
+    font-family: var(--unnamed-font-family-proxima-nova);
+    font-style: var(--unnamed-font-style-normal);
+    font-weight: var(--unnamed-font-weight-bold);
+    font-size: var(--unnamed-font-size-16);
+    line-height: var(--unnamed-line-spacing-22);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-3e3e3e);
+    margin-bottom: 1.5rem;
+  }
+}
+
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+.goal-card {
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #FFD61B;
+    box-shadow: 0 4px 15px rgba(255, 214, 27, 0.2);
+  }
+
+  &.selected {
+    border-color: #FFD61B;
+    background: #fffef7;
+    box-shadow: 0 4px 15px rgba(255, 214, 27, 0.3);
+  }
+  
+  .goal-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #666;
+  }
+
+  .goal-label {
+    font-family: var(--unnamed-font-family-proxima-nova);
+    font-style: var(--unnamed-font-style-normal);
+    font-weight: var(--unnamed-font-weight-bold);
+    font-size: var(--unnamed-font-size-11);
+    line-height: var(--unnamed-line-spacing-32);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-3e3e3e);
+    display: block;
+    margin: 0;
+  }
+}
+
+// HISTORIAL DE PESO
+.weight-history {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+// ACCIONES DEL FORMULARIO
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+}
+
+.save-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+
+  span {
+    font-family: var(--unnamed-font-family-proxima-nova);
+    font-style: var(--unnamed-font-style-normal);
+    font-weight: var(--unnamed-font-weight-bold);
+    font-size: var(--unnamed-font-size-11);
+    line-height: var(--unnamed-line-spacing-32);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-3e3e3e);
+    opacity: 0.7;
+  }
+  
+  @media (max-width: 768px) {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.save-btn {
+  background: none;
+  border: none;
+  font-family: var(--unnamed-font-family-proxima-nova);
+  font-style: var(--unnamed-font-style-normal);
+  font-weight: var(--unnamed-font-weight-bold);
+  font-size: var(--unnamed-font-size-11);
+  line-height: var(--unnamed-line-spacing-32);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3e3e3e);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.continue-btn {
+  background: #FFD61B;
+  color: #333;
+  border: none;
+  padding: 1rem 3rem;
+  font-family: var(--unnamed-font-family-proxima-nova);
+  font-style: var(--unnamed-font-style-normal);
+  font-weight: var(--unnamed-font-weight-bold);
+  font-size: var(--unnamed-font-size-16);
+  line-height: var(--unnamed-line-spacing-22);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 214, 27, 0.3);
+
+  &:hover {
+    background: #F7B733;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 214, 27, 0.4);
+  }
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 300px;
+  }
+}

@@ -22,24 +22,26 @@ function PageHeader({
             <p className="parrafo description">{description}</p>
           </div>
         </div>
-      </div>
-      
-      {indicators.length > 0 && (
-        <div className="progress-section">
-          <div className="progress-content">
-            <div className="progress-indicators">
-              {indicators.map((indicator, index) => (
-                <div 
-                  key={index} 
-                  className={`indicator ${indicator.status || ''}`}
-                >
-                  {indicator.icon}
-                </div>
-              ))}
+        
+        {indicators.length > 0 && (
+          <div className="progress-section">
+            <div className="progress-content">
+              <div className="progress-indicators">
+                {indicators.map((indicator, index) => (
+                  <div
+                    key={index}
+                    className={`indicator ${indicator.status || ''}`}
+                  >
+                    {indicator.icon}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+      
+      
     </>
   )
 }

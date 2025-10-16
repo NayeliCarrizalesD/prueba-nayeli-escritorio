@@ -4,62 +4,250 @@
 
 .medical-history-container {
   min-height: 100vh;
-  background: $gradient-secondary;
+  background: white;
   @include flex(column);
 }
 
 .medical-history-content {
-  max-width: 800px;
-  margin: 2rem auto;
+  max-width: none;
+  margin: 0;
   background: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
   overflow: hidden;
   flex: 1;
 }
 
 .medical-form {
-  padding: $spacing-xl;
+  padding: 0;
+  margin-top: $spacing-xl; // Espacio entre PageHeader y formulario
   
+  // Estilo específico para welcome-section en medical history
+  .welcome-section {
+    background-color: #F7F7F7;
+    margin-bottom: $spacing-xl;
+    
+    .welcome-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
+      
+      @media (max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+      }
+    }
+  }
+  
+  // Contenido principal centrado
   .section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 $spacing-xl;
     margin-bottom: $spacing-xxl;
     
     h3 {
       @include flex(row, flex-start, center);
       gap: $spacing-sm;
-      color: $text-primary;
-      font-size: $font-size-xl;
+      color: #434142;
+      font-family: var(--unnamed-font-family-proxima-nova);
+      font-style: var(--unnamed-font-style-normal);
+      font-weight: var(--unnamed-font-weight-bold);
+      font-size: var(--unnamed-font-size-24);
+      line-height: var(--unnamed-line-spacing-32);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      text-align: left;
+      opacity: 1;
       margin: 0 0 $spacing-xl 0;
-      font-weight: $font-weight-semibold;
     }
   }
   
   .questions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: $spacing-lg;
     
-    @include mobile {
-      grid-template-columns: 1fr;
+    .questions-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: $spacing-md;
+      align-items: start; // Alinear elementos al inicio
+      
+      @include mobile {
+        grid-template-columns: 1fr;
+        gap: $spacing-sm;
+      }
+    }
+    
+    .question-item {
+      background: white;
+      padding: $spacing-md;
+      border-radius: $border-radius-md;
+      display: flex;
+      flex-direction: column;
+      
+      .h4 {
+        font-family: var(--unnamed-font-family-proxima-nova);
+        font-style: var(--unnamed-font-style-normal);
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: 0px;
+        color: var(--unnamed-color-3e3e3e);
+        text-align: left;
+        margin: 0 0 $spacing-sm 0;
+        min-height: 66px; // Altura mínima para alinear preguntas
+        display: flex;
+        align-items: flex-start;
+      }
+      
+      .radio-group {
+        display: flex;
+        gap: $spacing-sm;
+        margin-bottom: $spacing-sm;
+        align-items: center;
+        min-height: 28px; // Altura mínima para alinear todos los radios
+        
+        .radio-option {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          cursor: pointer;
+          
+          input[type="radio"] {
+            display: none;
+          }
+          
+          .radio-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #FFD61B;
+            border-radius: 50%;
+            background: white;
+            position: relative;
+            
+            &::after {
+              content: '';
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              background: #FFD61B;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              opacity: 0;
+              transition: opacity 0.2s ease;
+            }
+          }
+          
+          input[type="radio"]:checked + .radio-custom::after {
+            opacity: 1;
+          }
+          
+          .parrafo {
+            font-family: var(--unnamed-font-family-proxima-nova);
+            font-style: var(--unnamed-font-style-normal);
+            font-weight: var(--unnamed-font-weight-bold);
+            font-size: var(--unnamed-font-size-16);
+            line-height: var(--unnamed-line-spacing-22);
+            letter-spacing: var(--unnamed-character-spacing-0);
+            color: var(--unnamed-color-3e3e3e);
+          }
+        }
+      }
+      
+      .description-input {
+        margin-top: $spacing-sm;
+        
+        input {
+          width: 100%;
+          padding: $spacing-xs;
+          border: none;
+          border-bottom: 2px solid #FFD61B;
+          background: transparent;
+          font-family: var(--unnamed-font-family-proxima-nova);
+          font-size: var(--unnamed-font-size-16);
+          
+          &:focus {
+            outline: none;
+            border-bottom-color: #F7B733;
+          }
+        }
+        
+        small {
+          display: block;
+          margin-top: $spacing-xs;
+          font-size: var(--unnamed-font-size-11);
+          color: var(--unnamed-color-3e3e3e);
+        }
+      }
+      
+      .surgery-details {
+        .date-input {
+          margin-top: $spacing-xs;
+          
+          input[type="date"] {
+            width: 100%;
+            padding: $spacing-xs;
+            border: none;
+            border-bottom: 2px solid #FFD61B;
+            background: transparent;
+            font-family: var(--unnamed-font-family-proxima-nova);
+            
+            &:focus {
+              outline: none;
+              border-bottom-color: #F7B733;
+            }
+          }
+        }
+      }
+      
+      .file-upload-section {
+        margin-top: $spacing-xs;
+        
+        .upload-btn {
+          background: transparent;
+          border: 2px solid #FFD61B;
+          color: #FFD61B;
+          padding: $spacing-xs $spacing-sm;
+          border-radius: 20px;
+          cursor: pointer;
+          font-family: var(--unnamed-font-family-proxima-nova);
+          font-size: 14px;
+          @include transition(all);
+          
+          &:hover {
+            background: #FFD61B;
+            color: #333;
+          }
+        }
+      }
     }
     
     .question-block {
-      @include card;
-      background: $gray-100;
-      border-left: 4px solid $primary-color;
-      padding: $spacing-md; // Menos padding que el card por defecto
+      background: transparent;
+      border: none;
+      padding: $spacing-md 0;
       
       &.full-width {
         grid-column: 1 / -1;
       }
       
       h3 {
-        color: $text-primary;
-        font-size: $font-size-lg;
-        font-weight: $font-weight-semibold;
+        color: var(--unnamed-color-3e3e3e);
+        font-family: var(--unnamed-font-family-proxima-nova);
+        font-style: var(--unnamed-font-style-normal);
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: 0px;
+        text-align: left;
         margin-bottom: $spacing-md;
-        line-height: 1.4;
       }
       
       .radio-group {
@@ -198,9 +386,9 @@
           @include flex(row, flex-start, center);
           gap: $spacing-md;
           margin-bottom: $spacing-md;
-          padding: $spacing-md;
-          background: $gray-50;
-          border-radius: $border-radius-md;
+          padding: 0;
+          background: transparent;
+          border-radius: 0;
           
           @include mobile {
             @include flex(column);
@@ -209,45 +397,100 @@
           
           .relationship-select,
           .condition-input {
-            @include input-base;
-            padding: $spacing-sm;
+            border: none;
+            border-bottom: 2px solid #FFD61B;
+            background: transparent;
+            padding: $spacing-sm 0;
             flex: 1;
+            font-family: var(--unnamed-font-family-proxima-nova);
+            font-size: 16px;
+            color: var(--unnamed-color-3e3e3e);
+            outline: none;
+            
+            &:focus {
+              border-bottom-color: #F7B733;
+            }
+            
+            &::placeholder {
+              color: rgba(62, 62, 62, 0.6);
+              font-style: italic;
+            }
             
             @include mobile {
               width: 100%;
             }
           }
           
+          .relationship-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            padding-right: 32px;
+          }
+          
           .remove-btn {
-            background: $danger-color;
-            color: $white;
-            border: none;
+            background: transparent;
+            color: #FFD61B;
+            border: 1px solid #FFD61B;
             width: 30px;
             height: 30px;
             border-radius: 50%;
             @include flex(center, center);
             cursor: pointer;
             @include transition(all);
+            font-size: 14px;
             
             &:hover {
-              background: darken($danger-color, 10%);
+              background: #FFD61B;
+              color: #333;
               transform: scale(1.1);
             }
           }
         }
         
         .add-family-btn {
-          @include button-base;
-          background: $info-color;
-          color: $white;
-          padding: $spacing-sm $spacing-md;
-          font-size: $font-size-sm;
-          @include flex(row, center, center);
-          gap: $spacing-sm;
+          background: transparent;
+          border: none;
+          color: #FFD61B;
+          font-family: var(--unnamed-font-family-proxima-nova);
+          @include flex(column, center, center);
+          gap: $spacing-xs;
+          cursor: pointer;
+          @include transition(all);
+          margin: $spacing-md auto 0 auto; // Centrado horizontal
+          width: fit-content; // Ajustar al contenido
+          
+          .plus-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #FFD61B;
+            border-radius: 50%;
+            @include flex(row, center, center);
+            font-size: 24px;
+            font-weight: bold;
+            @include transition(all);
+          }
+          
+          .btn-text {
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+            max-width: 120px;
+            line-height: 1.2;
+          }
           
           &:hover {
-            background: darken($info-color, 10%);
-            transform: translateY(-1px);
+            .plus-icon {
+              background: #FFD61B;
+              color: #333;
+              transform: scale(1.1);
+            }
+            
+            .btn-text {
+              color: #F7B733;
+            }
           }
         }
       }
@@ -318,10 +561,15 @@
 .form-actions {
   @include flex(row, space-between, center);
   margin-top: $spacing-xxl;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 $spacing-xl;
   
   @include mobile {
     @include flex(column, center, stretch);
     gap: $spacing-lg;
+    padding: 0 $spacing-md;
   }
   
   .save-progress {
@@ -335,32 +583,48 @@
     }
     
     .save-btn {
-      background: linear-gradient(135deg, $info-color 0%, #6f42c1 100%);
-      color: $white;
+      background: none;
       border: none;
-      padding: $spacing-sm $spacing-lg;
-      border-radius: $border-radius-lg;
+      color: #007bff;
+      font-size: 0.9rem;
       cursor: pointer;
-      font-size: $font-size-sm;
-      font-weight: $font-weight-medium;
-      @include transition(all);
-      
+      text-decoration: underline;
+      padding: 0;
+
       &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba($info-color, 0.3);
+        color: #0056b3;
       }
     }
   }
   
   .continue-btn {
-    @include button-primary;
-    font-size: $font-size-lg;
-    padding: $spacing-lg $spacing-xxl;
+    background: #FFD61B;
+    color: #333;
+    border: none;
+    padding: 1rem 3rem;
+    font-family: var(--unnamed-font-family-proxima-nova);
+    font-style: var(--unnamed-font-style-normal);
+    font-weight: var(--unnamed-font-weight-bold);
+    font-size: var(--unnamed-font-size-16);
+    line-height: var(--unnamed-line-spacing-22);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 214, 27, 0.3);
+    display: block;
+    margin: 0 auto;
+
+    &:hover {
+      background: #F7B733;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 214, 27, 0.4);
+    }
     
     @include mobile {
       width: 100%;
-      padding: $spacing-md $spacing-xl;
-      font-size: $font-size-base;
+      padding: 1rem 2rem;
+      font-size: var(--unnamed-font-size-16);
     }
   }
 }
