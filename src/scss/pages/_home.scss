@@ -36,6 +36,7 @@
   .welcome-content {
     display: flex;
     align-items: center;
+    justify-content: center;
     max-width: 900px;
     margin: 0 auto;
     padding: 0 2rem;
@@ -79,6 +80,7 @@
   .welcome-text {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem; // Reducir espacio entre bienvenida y nombre
     
     @media (max-width: 768px) {
       align-items: center;
