@@ -12,12 +12,9 @@
 .profile-container {
   max-width: 900px;
   margin: 0 auto;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: transparent;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  overflow: hidden;
   
   @media (max-width: 768px) {
     margin: 1rem;
@@ -30,7 +27,6 @@
   display: flex;
   align-items: center;
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -74,7 +70,6 @@
 .verification-section {
   padding: 2rem;
   text-align: center;
-  border-bottom: 1px solid #e9ecef;
   
   .verification-text {
     margin-bottom: 1.5rem;
@@ -208,17 +203,19 @@
       
       .data-input {
         padding: 0.75rem;
-        border: 2px solid #e9ecef;
-        border-radius: 6px;
+        border: none;
+        border-bottom: 2px solid #FFD61B;
+        border-radius: 0;
+        background: transparent;
         font-family: var(--unnamed-font-family-proxima-nova);
         font-size: var(--unnamed-font-size-16);
         color: var(--unnamed-color-3e3e3e);
-        transition: border-color 0.3s ease;
+        transition: border-bottom-color 0.3s ease;
         
         &:focus {
           outline: none;
-          border-color: #FFD61B;
-          box-shadow: 0 0 0 3px rgba(255, 214, 27, 0.1);
+          border-bottom-color: #F7B733;
+          box-shadow: 0 2px 0 0 rgba(255, 214, 27, 0.3);
         }
       }
       
@@ -260,7 +257,6 @@
 .action-section {
   padding: 2rem;
   text-align: center;
-  background: #f8f9fa;
   
   .continue-btn {
     background: #FFD61B;
