@@ -13,7 +13,7 @@
 .welcome-section {
   display: flex;
   align-items: center;
-  padding: 3rem 0;
+  padding: 1rem 0 3rem 0; // Reducir padding superior
   background-color: #F7F7F7;
   margin: 0 -100vw;
   padding-left: 100vw;
