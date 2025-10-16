@@ -14,7 +14,7 @@ import {
   FaUser
 } from 'react-icons/fa'
 
-function Goals({ userName = "Oscar Adan", onComplete, onLogout }) {
+function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     currentWeight: '72.0',
@@ -85,8 +85,8 @@ function Goals({ userName = "Oscar Adan", onComplete, onLogout }) {
             </div>
           </div>
           <div className="welcome-text">
-            <div className="h3">Nutrición</div>
-            <div className="h1">Hola, {userName}</div>
+            <div className="h3">¡Bienvenida</div>
+            <div className="h2">{userName}!</div>
           </div>
         </div>
       </div>
