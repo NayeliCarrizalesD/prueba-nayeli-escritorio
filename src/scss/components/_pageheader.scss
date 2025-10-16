@@ -102,14 +102,18 @@
     
     .description {
       margin-top: 1rem;
-      width: 100%;
-      max-width: 400px;
+      width: 412px;
+      height: 53px;
+      display: flex;
+      align-items: center;
       opacity: 0.8;
       line-height: 1.4;
       
       @media (max-width: 768px) {
         text-align: center;
+        width: 100%;
         max-width: 100%;
+        height: auto;
         margin-top: 1.5rem;
       }
     }
