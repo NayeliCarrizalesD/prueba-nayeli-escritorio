@@ -79,14 +79,16 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
     <div className="home">
       <div className="profile-container">
         <div className="welcome-section">
-          <div className="avatar">
-            <div className="avatar-icon">
-              <FaUser />
+          <div className="welcome-content">
+            <div className="avatar">
+              <div className="avatar-icon">
+                <FaUser />
+              </div>
             </div>
-          </div>
-          <div className="welcome-text">
-            <span className="parrafo">¡Bienvenida</span>
-            <span className="h1">{localUserData.name}!</span>
+            <div className="welcome-text">
+              <span className="parrafo">¡Bienvenida</span>
+              <span className="h1">{localUserData.name}!</span>
+            </div>
           </div>
         </div>
 

@@ -26,14 +26,34 @@
 .welcome-section {
   display: flex;
   align-items: center;
-  padding: 3rem 2rem;
+  padding: 3rem 0;
+  background-color: #F7F7F7;
+  margin: 0 -100vw;
+  padding-left: 100vw;
+  padding-right: 100vw;
   
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem 1rem;
+  // Contenido centrado dentro del fondo extendido
+  .welcome-content {
+    display: flex;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+      padding: 0 1rem;
+    }
   }
   
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+  }
+}
+
+.welcome-content {
   .avatar {
     margin-right: 2rem;
     
