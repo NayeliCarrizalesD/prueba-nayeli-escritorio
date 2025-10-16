@@ -9,20 +9,7 @@
   flex-direction: column;
 }
 
-.profile-container {
-  max-width: 900px;
-  margin: 0 auto;
-  background: transparent;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  
-  @media (max-width: 768px) {
-    margin: 1rem;
-    margin-top: 1rem;
-  }
-}
-
-// SECCIÓN DE BIENVENIDA
+// SECCIÓN DE BIENVENIDA - Pegada a la navbar
 .welcome-section {
   display: flex;
   align-items: center;
@@ -114,6 +101,20 @@
         justify-content: center;
       }
     }
+  }
+}
+
+// CONTENEDOR PRINCIPAL PARA EL RESTO DEL CONTENIDO
+.profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: transparent;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  
+  @media (max-width: 768px) {
+    margin: 1rem;
+    margin-top: 1rem;
   }
 }
 
