@@ -132,9 +132,6 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
                 {progressInfo.medicalHistory && (
                   <span className="saved-badge">Historial médico ✓</span>
                 )}
-                {progressInfo.nutritionData && (
-                  <span className="saved-badge">Nutrición ✓</span>
-                )}
               </div>
             </div>
           </div>

@@ -107,11 +107,10 @@ export function useClearLocalStorage(keys = []) {
 export function useProgressInfo() {
   const [medicalHistory] = useLocalStorage('medicalHistory', null)
   const [userGoals] = useLocalStorage('userGoals', null)
-  const [nutritionData] = useLocalStorage('nutritionData', null)
 
   const getProgressPercentage = () => {
     let completed = 0
-    let total = 3 // Total de secciones principales
+    let total = 2 // Total de secciones principales (Goals y Medical History)
 
     if (medicalHistory && Object.values(medicalHistory).some(val => val !== '' && val.length !== 0)) {
       completed++
@@ -119,19 +118,16 @@ export function useProgressInfo() {
     if (userGoals && Object.values(userGoals).some(val => val !== '' && val.length !== 0)) {
       completed++
     }
-    if (nutritionData && Object.values(nutritionData).some(val => val !== '' && val.length !== 0)) {
-      completed++
-    }
 
     return Math.round((completed / total) * 100)
   }
 
   const hasAnyProgress = () => {
-    return medicalHistory || userGoals || nutritionData
+    return medicalHistory || userGoals
   }
 
   const getLastSaved = () => {
-    const keys = ['medicalHistory', 'userGoals', 'nutritionData']
+    const keys = ['medicalHistory', 'userGoals']
     let lastSaved = null
 
     keys.forEach(key => {
@@ -150,7 +146,6 @@ export function useProgressInfo() {
   return {
     medicalHistory,
     userGoals,
-    nutritionData,
     progressPercentage: getProgressPercentage(),
     hasProgress: hasAnyProgress(),
     lastSaved: getLastSaved()
