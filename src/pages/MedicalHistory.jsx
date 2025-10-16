@@ -83,12 +83,7 @@ function MedicalHistory({ userName = "Nayeli Carrizales", onComplete, onLogout }
   }
 
   const handleSaveProgress = () => {
-    // Los datos ya se guardan automáticamente con el hook
-    const now = new Date()
-    const timeString = now.toLocaleTimeString('es-ES', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    })
+    
     
     Swal.fire({
       title: '¡Progreso guardado!',
