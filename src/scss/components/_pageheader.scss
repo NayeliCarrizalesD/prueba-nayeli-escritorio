@@ -94,3 +94,57 @@
     }
   }
 }
+
+// SECCIÓN DE INDICADORES DE PROGRESO
+.progress-section {
+  background: white;
+  padding: 2rem 0;
+  border-bottom: 1px solid #e9ecef;
+  
+  .progress-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding: 0 2rem;
+    
+    @media (max-width: 768px) {
+      padding: 0 1rem;
+    }
+  }
+  
+  .progress-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    
+    @media (max-width: 768px) {
+      gap: 0.5rem;
+    }
+  }
+  
+  .indicator {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+
+    &.active {
+      background: #FFD61B;
+      color: #333;
+      box-shadow: 0 4px 12px rgba(255, 214, 27, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+  }
+}
