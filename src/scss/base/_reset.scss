@@ -185,6 +185,71 @@ th {
 }
 
 // ==========================================================================
+// CHARACTER STYLES - TIPOGRAFÍA CON CSS VARIABLES
+// ==========================================================================
+
+/* Character Styles */
+.h1 {
+  font-family: var(--unnamed-font-family-proxima-nova);
+  font-style: var(--unnamed-font-style-normal);
+  font-weight: var(--unnamed-font-weight-bold);
+  font-size: var(--unnamed-font-size-54);
+  line-height: var(--unnamed-line-spacing-64);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3e3e3e);
+}
+
+.h2 {
+  font-family: var(--unnamed-font-family-proxima-nova);
+  font-style: var(--unnamed-font-style-normal);
+  font-weight: var(--unnamed-font-weight-bold);
+  font-size: var(--unnamed-font-size-36);
+  line-height: var(--unnamed-line-spacing-46);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3e3e3e);
+}
+
+.h3 {
+  font-family: var(--unnamed-font-family-proxima-nova);
+  font-style: var(--unnamed-font-style-normal);
+  font-weight: var(--unnamed-font-weight-bold);
+  font-size: var(--unnamed-font-size-24);
+  line-height: var(--unnamed-line-spacing-32);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3e3e3e);
+}
+
+.h4 {
+  font-family: var(--unnamed-font-family-proxima-nova);
+  font-style: var(--unnamed-font-style-normal);
+  font-weight: var(--unnamed-font-weight-bold);
+  font-size: var(--unnamed-font-size-11);
+  line-height: var(--unnamed-line-spacing-32);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3e3e3e);
+}
+
+.h5 {
+  font-family: var(--unnamed-font-family-proxima-nova);
+  font-style: var(--unnamed-font-style-normal);
+  font-weight: var(--unnamed-font-weight-bold);
+  font-size: var(--unnamed-font-size-7);
+  line-height: var(--unnamed-line-spacing-32);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3e3e3e);
+}
+
+.parrafo {
+  font-family: var(--unnamed-font-family-proxima-nova);
+  font-style: var(--unnamed-font-style-normal);
+  font-weight: var(--unnamed-font-weight-bold);
+  font-size: var(--unnamed-font-size-16);
+  line-height: var(--unnamed-line-spacing-22);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3e3e3e);
+}
+
+// ==========================================================================
 // APP LAYOUT STYLES
 // ==========================================================================
 .App {

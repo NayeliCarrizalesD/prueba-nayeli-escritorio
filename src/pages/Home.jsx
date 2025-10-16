@@ -61,13 +61,13 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
             </div>
           </div>
           <div className="welcome-text">
-            <h2>¡Bienvenida</h2>
-            <h1>{localUserData.name}!</h1>
+            <span className="parrafo">¡Bienvenida</span>
+            <span className="h1">{localUserData.name}!</span>
           </div>
         </div>
 
         <div className="verification-section">
-          <p className="verification-text">
+          <p className="parrafo verification-text">
             Para comenzar, ayúdanos a verificar tus datos.
           </p>
           <div className="edit-actions">
@@ -93,7 +93,7 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
             <div className="data-item">
               <span className="data-icon"><FaUser /></span>
               <div className="data-content">
-                <span className="data-label">Nombre</span>
+                <span className="h5 data-label">Nombre</span>
                 {isEditing ? (
                   <input
                     type="text"
@@ -102,14 +102,14 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
                     onChange={(e) => handleInputChange('name', e.target.value)}
                   />
                 ) : (
-                  <span className="data-value">{localUserData.name}</span>
+                  <span className="parrafo data-value">{localUserData.name}</span>
                 )}
               </div>
             </div>
             <div className="data-item">
               <span className="data-icon"><FaBirthdayCake /></span>
               <div className="data-content">
-                <span className="data-label">Edad</span>
+                <span className="h5 data-label">Edad</span>
                 {isEditing ? (
                   <input
                     type="text"
@@ -118,7 +118,7 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
                     onChange={(e) => handleInputChange('age', e.target.value)}
                   />
                 ) : (
-                  <span className="data-value">{localUserData.age}</span>
+                  <span className="parrafo data-value">{localUserData.age}</span>
                 )}
               </div>
             </div>
@@ -128,7 +128,7 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
             <div className="data-item">
               <span className="data-icon"><FaEnvelope /></span>
               <div className="data-content">
-                <span className="data-label">Correo electrónico</span>
+                <span className="h5 data-label">Correo electrónico</span>
                 {isEditing ? (
                   <input
                     type="email"
@@ -137,14 +137,14 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
                     onChange={(e) => handleInputChange('email', e.target.value)}
                   />
                 ) : (
-                  <span className="data-value">{localUserData.email}</span>
+                  <span className="parrafo data-value">{localUserData.email}</span>
                 )}
               </div>
             </div>
             <div className="data-item">
               <span className="data-icon"><FaPhone /></span>
               <div className="data-content">
-                <span className="data-label">Teléfono celular</span>
+                <span className="h5 data-label">Teléfono celular</span>
                 {isEditing ? (
                   <input
                     type="tel"
@@ -153,7 +153,7 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
                     onChange={(e) => handleInputChange('phone', e.target.value)}
                   />
                 ) : (
-                  <span className="data-value">{localUserData.phone}</span>
+                  <span className="parrafo data-value">{localUserData.phone}</span>
                 )}
               </div>
             </div>
@@ -163,7 +163,7 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
             <div className="data-item full-width">
               <span className="data-icon"><FaBriefcase /></span>
               <div className="data-content">
-                <span className="data-label">Lugar de trabajo</span>
+                <span className="h5 data-label">Lugar de trabajo</span>
                 {isEditing ? (
                   <input
                     type="text"
@@ -172,7 +172,7 @@ function Home({ userData, onUserDataUpdate, onDataVerified, onLogout }) {
                     onChange={(e) => handleInputChange('workplace', e.target.value)}
                   />
                 ) : (
-                  <span className="data-value highlighted">{localUserData.workplace}</span>
+                  <span className="parrafo data-value highlighted">{localUserData.workplace}</span>
                 )}
               </div>
             </div>

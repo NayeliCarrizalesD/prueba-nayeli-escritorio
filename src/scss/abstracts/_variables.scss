@@ -2,6 +2,28 @@
 // VARIABLES SASS - SISTEMA DE DISEÑO
 // ==========================================================================
 
+// CSS CUSTOM PROPERTIES (CSS Variables)
+:root {
+  /* Colors */
+  --unnamed-color-3e3e3e: #3E3E3E;
+
+  /* Font/text values */
+  --unnamed-font-family-proxima-nova: Proxima Nova, sans-serif;
+  --unnamed-font-style-normal: normal;
+  --unnamed-font-weight-bold: bold;
+  --unnamed-font-size-7: 7px;
+  --unnamed-font-size-11: 11px;
+  --unnamed-font-size-16: 16px;
+  --unnamed-font-size-24: 24px;
+  --unnamed-font-size-36: 36px;
+  --unnamed-font-size-54: 54px;
+  --unnamed-character-spacing-0: 0px;
+  --unnamed-line-spacing-22: 22px;
+  --unnamed-line-spacing-32: 32px;
+  --unnamed-line-spacing-46: 46px;
+  --unnamed-line-spacing-64: 64px;
+}
+
 // COLORES PRINCIPALES
 // Basados en el diseño actual del proyecto
 $primary-color: #FFD61B;      // Amarillo principal
@@ -32,7 +54,7 @@ $gray-800: #343a40;
 $gray-900: #212529;
 
 // COLORES DE TEXTO
-$text-primary: #333333;
+$text-primary: var(--unnamed-color-3e3e3e);
 $text-secondary: #666666;
 $text-muted: #6c757d;
 $text-light: rgba(255, 255, 255, 0.9);
