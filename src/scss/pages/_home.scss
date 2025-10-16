@@ -1,0 +1,435 @@
+// ==========================================================================
+// PÁGINA: HOME
+// ==========================================================================
+
+.home-container {
+  min-height: 100vh;
+  background: $gradient-secondary;
+  @include flex(column);
+}
+
+.home-content {
+  @include container(1400px);
+  @include flex(row, center, stretch);
+  gap: $spacing-xxl;
+  
+  @include mobile {
+    @include flex(column);
+    gap: $spacing-xl;
+  }
+}
+
+// ESTILOS PARA EL PERFIL/VERIFICACIÓN DE DATOS
+.profile-container {
+  @include container(800px);
+  background: $white;
+  text-align: center;
+  
+  .welcome-section {
+    @include flex(column, center, center);
+    padding: $spacing-xxl $spacing-xl;
+    border-bottom: 1px solid $gray-200;
+    
+    .avatar {
+      margin-bottom: $spacing-lg;
+      
+      .avatar-icon {
+        @include avatar(80px, $gradient-primary);
+        font-size: 2rem;
+      }
+    }
+    
+    .welcome-text {
+      h2 {
+        color: $text-secondary;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-medium;
+        margin: 0 0 $spacing-sm 0;
+      }
+      
+      h1 {
+        color: $text-primary;
+        font-size: $font-size-3xl;
+        font-weight: $font-weight-bold;
+        margin: 0;
+        
+        @include mobile {
+          font-size: $font-size-2xl;
+        }
+      }
+    }
+  }
+  
+  .verification-section {
+    padding: $spacing-xl;
+    border-bottom: 1px solid $gray-200;
+    
+    .verification-text {
+      color: $text-secondary;
+      font-size: $font-size-base;
+      margin-bottom: $spacing-lg;
+    }
+    
+    .edit-actions {
+      @include flex(row, center, center);
+      gap: $spacing-md;
+      
+      .edit-btn, .save-btn, .cancel-btn {
+        @include button-base;
+        @include flex(row, center, center);
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-lg;
+        font-size: $font-size-sm;
+        @include transition(all);
+      }
+      
+      .edit-btn {
+        background: $primary-color;
+        color: $text-dark;
+        
+        &:hover {
+          background: $primary-dark;
+          transform: translateY(-1px);
+        }
+      }
+      
+      .save-btn {
+        background: $success-color;
+        color: $white;
+        
+        &:hover {
+          background: $success-dark;
+          transform: translateY(-1px);
+        }
+      }
+      
+      .cancel-btn {
+        background: $gray-500;
+        color: $white;
+        
+        &:hover {
+          background: $gray-600;
+          transform: translateY(-1px);
+        }
+      }
+    }
+  }
+  
+  .user-data {
+    padding: $spacing-xl;
+    
+    .data-row {
+      @include flex(row, stretch, stretch);
+      gap: $spacing-lg;
+      margin-bottom: $spacing-lg;
+      
+      @include mobile {
+        @include flex(column);
+        gap: $spacing-md;
+      }
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    .data-item {
+      @include flex(row, flex-start, flex-start);
+      gap: $spacing-md;
+      background: $gray-50;
+      padding: $spacing-lg;
+      border-radius: $border-radius-md;
+      border: 1px solid $gray-200;
+      flex: 1;
+      
+      &.full-width {
+        flex: none;
+        width: 100%;
+      }
+      
+      .data-icon {
+        color: $primary-color;
+        font-size: $font-size-lg;
+        margin-top: $spacing-xs;
+        flex-shrink: 0;
+      }
+      
+      .data-content {
+        @include flex(column, flex-start, stretch);
+        gap: $spacing-sm;
+        flex: 1;
+        
+        .data-label {
+          color: $text-secondary;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-medium;
+        }
+        
+        .data-value {
+          color: $text-primary;
+          font-size: $font-size-base;
+          font-weight: $font-weight-normal;
+          
+          &.highlighted {
+            background: $primary-color;
+            color: $text-dark;
+            padding: $spacing-xs $spacing-sm;
+            border-radius: $border-radius-sm;
+            font-weight: $font-weight-medium;
+          }
+        }
+        
+        .data-input {
+          @include input-base;
+          padding: $spacing-sm;
+          font-size: $font-size-base;
+        }
+      }
+    }
+  }
+  
+  .action-section {
+    padding: $spacing-xl;
+    border-top: 1px solid $gray-200;
+    
+    .continue-btn {
+      @include button-primary;
+      font-size: $font-size-lg;
+      padding: $spacing-md $spacing-xxl;
+      
+      @include mobile {
+        width: 100%;
+        padding: $spacing-md $spacing-xl;
+      }
+    }
+  }
+}
+
+// Hero Section - Lado izquierdo
+.hero-section {
+  flex: 1;
+  @include flex(column, center, center);
+  text-align: center;
+  padding: $spacing-xxl;
+  
+  @include mobile {
+    padding: $spacing-xl $spacing-lg;
+  }
+  
+  .hero-content {
+    max-width: 500px;
+    
+    h1 {
+      color: $text-primary;
+      font-size: $font-size-5xl;
+      font-weight: $font-weight-bold;
+      margin-bottom: $spacing-lg;
+      line-height: 1.2;
+      
+      @include mobile {
+        font-size: $font-size-4xl;
+      }
+      
+      .highlight {
+        background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+    
+    .subtitle {
+      color: $text-secondary;
+      font-size: $font-size-xl;
+      margin-bottom: $spacing-xxl;
+      line-height: 1.6;
+      
+      @include mobile {
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-xl;
+      }
+    }
+    
+    .cta-button {
+      @include button-primary;
+      font-size: $font-size-xl;
+      padding: $spacing-lg $spacing-xxl;
+      @include shadow-lg;
+      
+      @include mobile {
+        font-size: $font-size-lg;
+        padding: $spacing-md $spacing-xl;
+        width: 100%;
+      }
+      
+      &:hover {
+        @include shadow-xl;
+      }
+    }
+  }
+}
+
+// Welcome Section - Lado derecho
+.welcome-section {
+  flex: 1;
+  @include flex(column, center, center);
+  padding: $spacing-xxl;
+  
+  @include mobile {
+    padding: $spacing-xl $spacing-lg;
+  }
+  
+  .welcome-card {
+    @include card;
+    background: $white;
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+    @include shadow-lg;
+    
+    .card-header {
+      @include flex(column, center, center);
+      margin-bottom: $spacing-xl;
+      
+      .avatar {
+        width: 80px;
+        height: 80px;
+        background: $gradient-primary;
+        border-radius: 50%;
+        @include flex(center, center);
+        color: $white;
+        font-size: $font-size-3xl;
+        font-weight: $font-weight-bold;
+        margin-bottom: $spacing-lg;
+        @include shadow-md;
+      }
+      
+      h2 {
+        color: $text-primary;
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-semibold;
+        margin: 0;
+      }
+      
+      .user-info {
+        color: $text-secondary;
+        font-size: $font-size-base;
+        margin-top: $spacing-sm;
+      }
+    }
+    
+    .progress-section {
+      margin-bottom: $spacing-xl;
+      
+      h3 {
+        color: $text-primary;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-medium;
+        margin-bottom: $spacing-lg;
+      }
+      
+      .progress-indicators {
+        @include flex(row, space-between, center);
+        margin-bottom: $spacing-lg;
+        
+        .indicator {
+          @include flex(column, center, center);
+          text-align: center;
+          
+          .circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            @include flex(center, center);
+            font-size: $font-size-sm;
+            font-weight: $font-weight-medium;
+            margin-bottom: $spacing-sm;
+            
+            &.completed {
+              background: $success-color;
+              color: $white;
+            }
+            
+            &.active {
+              background: $primary-color;
+              color: $white;
+            }
+            
+            &.pending {
+              background: $gray-300;
+              color: $gray-600;
+            }
+          }
+          
+          .label {
+            font-size: $font-size-xs;
+            color: $text-secondary;
+            text-align: center;
+          }
+        }
+        
+        .connector {
+          flex: 1;
+          height: 2px;
+          background: $gray-300;
+          margin: 0 $spacing-sm;
+          
+          &.completed {
+            background: $success-color;
+          }
+        }
+      }
+    }
+    
+    .stats-section {
+      margin-bottom: $spacing-xl;
+      
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: $spacing-lg;
+        
+        .stat-item {
+          @include flex(column, center, center);
+          padding: $spacing-md;
+          background: $gray-50;
+          border-radius: $border-radius-md;
+          border: $border-width solid $border-color;
+          
+          .stat-value {
+            font-size: $font-size-xl;
+            font-weight: $font-weight-bold;
+            color: $primary-color;
+            margin-bottom: $spacing-xs;
+          }
+          
+          .stat-label {
+            font-size: $font-size-sm;
+            color: $text-secondary;
+            text-align: center;
+          }
+        }
+      }
+    }
+    
+    .quick-actions {
+      .action-buttons {
+        @include flex(column, center, stretch);
+        gap: $spacing-md;
+        
+        .action-btn {
+          @include button-secondary;
+          @include flex(row, center, center);
+          gap: $spacing-sm;
+          padding: $spacing-md $spacing-lg;
+          font-size: $font-size-sm;
+          
+          &:hover {
+            background: $primary-color;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}

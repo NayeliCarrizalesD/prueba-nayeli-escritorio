@@ -1,0 +1,341 @@
+// ==========================================================================
+// MIXINS SASS - FUNCIONES REUTILIZABLES
+// ==========================================================================
+
+// FLEXBOX UTILITIES
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+@mixin center($type: both) {
+  @if $type == both {
+    @include flex(row, center, center);
+  } @else if $type == horizontal {
+    @include flex(row, center, stretch);
+  } @else if $type == vertical {
+    @include flex(column, flex-start, center);
+  }
+}
+
+// TRANSICIONES
+@mixin transition($properties: all, $duration: $transition-base, $timing: ease) {
+  transition: $properties $duration $timing;
+}
+
+// SOMBRAS CON EFECTOS HOVER
+@mixin shadow-hover($shadow-base: $shadow-md, $shadow-hover: $shadow-lg) {
+  box-shadow: $shadow-base;
+  @include transition(box-shadow);
+  
+  &:hover {
+    box-shadow: $shadow-hover;
+  }
+}
+
+// SOMBRAS INDIVIDUALES
+@mixin shadow-sm {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@mixin shadow-md {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@mixin shadow-lg {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+@mixin shadow-xl {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+@mixin shadow-xl {
+  box-shadow: $shadow-xl;
+}
+
+// SISTEMA DE BOTONES
+@mixin button-base {
+  border: none;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  font-weight: $font-weight-semibold;
+  @include transition(all);
+  font-family: $font-family-primary;
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: $gradient-button;
+  color: $text-dark;
+  padding: $spacing-md $spacing-xl;
+  font-size: $font-size-base;
+  @include shadow-hover($shadow-sm, $shadow-md);
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background: $gray-600;
+  color: $white;
+  padding: $spacing-md $spacing-lg;
+  font-size: $font-size-sm;
+  
+  &:hover:not(:disabled) {
+    background: $gray-700;
+    transform: translateY(-1px);
+  }
+}
+
+// SISTEMA DE INPUTS
+@mixin input-base {
+  width: 100%;
+  border: $border-width solid $border-color;
+  border-radius: $border-radius-md;
+  font-size: $font-size-base;
+  font-family: $font-family-primary;
+  @include transition(all);
+  box-sizing: border-box;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+  }
+  
+  &::placeholder {
+    color: $gray-500;
+  }
+}
+
+@mixin input-dark {
+  @include input-base;
+  background-color: $gray-800;
+  color: $white;
+  border-color: $gray-700;
+  
+  &:focus {
+    background-color: $gray-700;
+    border-color: $primary-color;
+  }
+  
+  &::placeholder {
+    color: $gray-500;
+  }
+}
+
+// AVATAR/ICONO CIRCULAR
+@mixin avatar($size: 60px, $bg: $gradient-avatar) {
+  width: $size;
+  height: $size;
+  border-radius: $border-radius-full;
+  border: 3px solid $white;
+  background: $bg;
+  @include center;
+  font-size: calc($size * 0.5);
+  color: $white;
+  flex-shrink: 0;
+  @include shadow-hover($shadow-sm, $shadow-md);
+  @include transition(all);
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// INDICADORES DE PROGRESO
+@mixin indicator($size: 50px) {
+  width: $size;
+  height: $size;
+  border-radius: $border-radius-full;
+  background: rgba($white, 0.3);
+  @include center;
+  font-size: calc($size * 0.3);
+  @include transition(all);
+  cursor: pointer;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+  
+  &.completed {
+    background: $success-color;
+    color: $white;
+    @include shadow-hover(
+      0 4px 15px rgba($success-color, 0.3),
+      0 6px 20px rgba($success-color, 0.4)
+    );
+    
+    &:hover {
+      background: $success-dark;
+    }
+  }
+  
+  &.active {
+    background: $white;
+    @include shadow-hover($shadow-md, $shadow-lg);
+    transform: scale(1.1);
+  }
+}
+
+// CONTENEDORES
+@mixin container($max-width: 1200px) {
+  max-width: $max-width;
+  margin: $spacing-xl auto;
+  background: $white;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-lg;
+  overflow: hidden;
+  flex: 1;
+}
+
+// HEADERS DE PÁGINA
+@mixin page-header {
+  background: $gradient-primary;
+  padding: $spacing-xl;
+  color: $text-primary;
+}
+
+// CARDS Y COMPONENTES
+@mixin card {
+  background: $white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  @include shadow-hover($shadow-sm, $shadow-md);
+  @include transition(all);
+}
+
+@mixin card-hover {
+  @include card;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// RESPONSIVE DESIGN
+@mixin mobile {
+  @media (max-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-md + 1px}) and (max-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-lg + 1px}) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    @content;
+  }
+}
+
+// UTILIDADES DE TEXTO
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// GRADIENTES PERSONALIZADOS
+@mixin gradient-text($gradient: $gradient-primary) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// ANIMACIONES
+@mixin scale-hover($scale: 1.05) {
+  @include transition(transform);
+  
+  &:hover {
+    transform: scale($scale);
+  }
+}
+
+@mixin fade-in($duration: 0.3s) {
+  opacity: 0;
+  animation: fadeIn $duration ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+// GRID UTILITIES
+@mixin grid-responsive($min-width: 250px, $gap: $spacing-lg) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+// RADIO UTILITIES (añadidos para compatibilidad)
+@mixin radio-group {
+  @include flex(row, flex-start, center, wrap);
+  gap: $spacing-lg;
+  
+  @include mobile {
+    @include flex(column, flex-start, stretch);
+    gap: $spacing-md;
+  }
+}
+
+@mixin radio-option {
+  @include flex(row, flex-start, center);
+  gap: $spacing-sm;
+  cursor: pointer;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-sm;
+  @include transition(background-color);
+  
+  &:hover {
+    background-color: $gray-100;
+  }
+  
+  input[type="radio"] {
+    accent-color: $primary-color;
+  }
+}
+
+// UTILIDADES ADICIONALES PARA COMPATIBILIDAD
+@mixin form-group {
+  margin-bottom: $spacing-lg;
+  
+  label {
+    display: block;
+    color: $text-primary;
+    font-weight: $font-weight-medium;
+    margin-bottom: $spacing-sm;
+    font-size: $font-size-sm;
+  }
+}

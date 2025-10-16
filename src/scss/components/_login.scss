@@ -1,0 +1,107 @@
+// ==========================================================================
+// COMPONENTE: LOGIN
+// ==========================================================================
+
+.login-container {
+  min-height: 100vh;
+  background: $gradient-secondary;
+  @include flex(center, center);
+}
+
+.login-form {
+  @include card;
+  background: $white;
+  width: 100%;
+  max-width: 400px;
+  
+  .form-header {
+    text-align: center;
+    margin-bottom: $spacing-xxl;
+    
+    h2 {
+      color: $text-primary;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      margin-bottom: $spacing-sm;
+    }
+    
+    p {
+      color: $text-secondary;
+      font-size: $font-size-base;
+    }
+  }
+  
+  .form-group {
+    margin-bottom: $spacing-xl;
+    
+    label {
+      display: block;
+      color: $text-primary;
+      font-weight: $font-weight-medium;
+      margin-bottom: $spacing-sm;
+      font-size: $font-size-sm;
+    }
+    
+    .input-wrapper {
+      position: relative;
+      
+      input {
+        @include input-base;
+        padding: $spacing-md;
+        padding-left: 3rem;
+        
+        &:focus {
+          border-color: $primary-color;
+          box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+        }
+      }
+      
+      .input-icon {
+        position: absolute;
+        left: $spacing-md;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $gray-500;
+      }
+      
+      .password-toggle {
+        position: absolute;
+        right: $spacing-md;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: $gray-500;
+        cursor: pointer;
+        
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+  
+  .form-actions {
+    .login-btn {
+      @include button-primary;
+      width: 100%;
+      padding: $spacing-md $spacing-lg;
+      font-size: $font-size-base;
+      margin-bottom: $spacing-lg;
+    }
+    
+    .forgot-password {
+      text-align: center;
+      
+      a {
+        color: $primary-color;
+        text-decoration: none;
+        font-size: $font-size-sm;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

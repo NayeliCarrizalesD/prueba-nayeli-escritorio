@@ -1,0 +1,96 @@
+// ==========================================================================
+// COMPONENTE: PAGE HEADER
+// ==========================================================================
+
+.page-header {
+  @include card;
+  background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
+  color: #333;
+  padding: 2rem;
+  
+  .user-info {
+    @include flex(row, flex-start, flex-start);
+    gap: $spacing-lg;
+    margin-bottom: $spacing-xl;
+    
+    @include mobile {
+      @include flex(column, flex-start, center);
+      text-align: center;
+      gap: $spacing-md;
+    }
+  }
+  
+  .header-content {
+    @include flex(row, flex-start, flex-start);
+    gap: $spacing-xl;
+    width: 100%;
+    
+    @include mobile {
+      @include flex(column, flex-start, center);
+      gap: $spacing-lg;
+    }
+  }
+  
+  .user-text {
+    flex: 2; // 66.7% del espacio (8/12)
+    
+    h2 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-medium;
+      margin: 0 0 $spacing-sm 0;
+      opacity: 0.8;
+    }
+    
+    h1 {
+      font-size: $font-size-3xl;
+      font-weight: $font-weight-bold;
+      margin: 0 0 $spacing-md 0;
+      
+      @include mobile {
+        font-size: $font-size-2xl;
+      }
+    }
+    
+    p {
+      font-size: $font-size-sm;
+      line-height: $line-height-base;
+      margin: 0;
+      opacity: 0.9;
+      
+      @include mobile {
+        font-size: $font-size-xs;
+      }
+    }
+  }
+  
+  .progress-indicators {
+    flex: 1; // 33.3% del espacio (4/12)
+    @include flex(row, flex-end, flex-start, wrap);
+    gap: $spacing-md;
+    
+    @include mobile {
+      @include flex(row, center, center, wrap);
+      gap: $spacing-sm;
+    }
+  }
+  
+  .user-avatar-icon {
+    @include avatar(60px);
+    
+    @include mobile {
+      @include avatar(50px);
+    }
+  }
+  
+  .indicator {
+    @include indicator(50px);
+    
+    @include mobile {
+      @include indicator(40px);
+    }
+    
+    @include mobile-only {
+      @include indicator(35px);
+    }
+  }
+}

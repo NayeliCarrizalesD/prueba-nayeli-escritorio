@@ -1,0 +1,32 @@
+// ==========================================================================
+// MAIN SCSS FILE
+// Imports all SASS modules in the correct order
+// ==========================================================================
+
+// GOOGLE FONTS
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+// 1. ABSTRACTS
+// Variables, mixins, functions - no CSS output
+@import 'abstracts/_variables';
+@import 'abstracts/_mixins';
+
+// 2. BASE
+// Reset, typography, basic styling
+@import 'base/_reset';
+
+// 3. COMPONENTS
+// Reusable UI components
+@import 'components/_pageheader';
+@import 'components/_navbar';
+@import 'components/_login';
+
+// 4. PAGES
+// Page-specific styles
+@import 'pages/_home';
+@import 'pages/_goals';
+@import 'pages/_medical-history';
+@import 'pages/_nutrition';
+@import 'pages/_about';
+@import 'pages/_contact';
+@import 'pages/_login';

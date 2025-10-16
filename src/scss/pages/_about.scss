@@ -1,0 +1,115 @@
+// ==========================================================================
+// PÁGINA: ABOUT
+// ==========================================================================
+
+.about-container {
+  min-height: 100vh;
+  background: $gradient-secondary;
+  @include flex(column);
+  padding: $spacing-xl;
+  
+  // Título principal
+  h1 {
+    text-align: center;
+    color: $text-primary;
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-xxl;
+    
+    @include mobile {
+      font-size: $font-size-3xl;
+      margin-bottom: $spacing-xl;
+    }
+  }
+  
+  .about-content {
+    @include container(1000px);
+    
+    .about-section {
+      @include card;
+      background: $white;
+      margin-bottom: $spacing-xxl;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      h2 {
+        color: $text-primary;
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-semibold;
+        margin-bottom: $spacing-lg;
+        @include flex(row, flex-start, center);
+        gap: $spacing-sm;
+      }
+      
+      p {
+        color: $text-secondary;
+        font-size: $font-size-base;
+        line-height: 1.7;
+        margin-bottom: $spacing-md;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      
+      .tech-list {
+        list-style: none;
+        padding: 0;
+        
+        li {
+          color: $text-secondary;
+          font-size: $font-size-base;
+          line-height: 1.6;
+          margin-bottom: $spacing-md;
+          padding-left: $spacing-lg;
+          position: relative;
+          
+          &:before {
+            content: "•";
+            color: $primary-color;
+            font-size: $font-size-lg;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+          
+          strong {
+            color: $text-primary;
+            font-weight: $font-weight-semibold;
+          }
+        }
+      }
+      
+      .features-list {
+        .feature {
+          margin-bottom: $spacing-xl;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+          
+          h3 {
+            color: $text-primary;
+            font-size: $font-size-lg;
+            font-weight: $font-weight-medium;
+            margin-bottom: $spacing-sm;
+          }
+          
+          p {
+            color: $text-secondary;
+            font-size: $font-size-base;
+            line-height: 1.6;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}

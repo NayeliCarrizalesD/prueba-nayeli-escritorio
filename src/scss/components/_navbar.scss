@@ -1,0 +1,129 @@
+// ==========================================================================
+// COMPONENTE: NAVBAR
+// ==========================================================================
+
+.navbar {
+  background-color: $white;
+  padding: $spacing-md 0;
+  box-shadow: $shadow-sm;
+  border-bottom: 1px solid $gray-200;
+  
+  .nav-container {
+    width: 100%;
+    padding: 0 $spacing-xxl;
+    @include flex(row, space-between, center);
+    box-sizing: border-box;
+    position: relative;
+    
+    @include mobile {
+      padding: 0 $spacing-lg;
+    }
+  }
+  
+  .nav-logo {
+    @include flex(row, flex-start, center);
+    gap: $spacing-sm;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    text-decoration: none;
+    @include transition(color);
+    
+    &:hover {
+      color: #667eea;
+    }
+  }
+  
+  .logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius-full;
+    border: 2px solid $primary-color;
+  }
+  
+  .nav-menu-center {
+    @include flex(row, center, center);
+    list-style: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    @include mobile {
+      position: static;
+      transform: none;
+    }
+  }
+  
+  .nav-menu-right {
+    @include flex(row, flex-end, center);
+    list-style: none;
+    gap: $spacing-xl;
+    
+    @include mobile {
+      gap: $spacing-md;
+    }
+  }
+  
+  .nav-link {
+    color: $gray-700;
+    text-decoration: none;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-sm;
+    font-weight: $font-weight-medium;
+    @include transition(all);
+    
+    &:hover {
+      background-color: rgba($primary-color, 0.1);
+      color: $text-primary;
+      transform: translateY(-1px);
+    }
+    
+    &.active {
+      background-color: $primary-color;
+      color: $text-dark;
+      font-weight: $font-weight-semibold;
+    }
+  }
+  
+  .logout-btn {
+    @include button-secondary;
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-sm;
+    background: linear-gradient(135deg, $error-color 0%, #c82333 100%);
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Responsive para móviles
+@include mobile {
+  .navbar {
+    .nav-container {
+      @include flex(column, center, center);
+      gap: $spacing-md;
+    }
+    
+    .nav-menu-center,
+    .nav-menu-right {
+      @include flex(row, center, center);
+      position: static;
+      transform: none;
+      gap: $spacing-md;
+    }
+    
+    .nav-toggle {
+      display: block;
+      background: none;
+      border: none;
+      font-size: $font-size-xl;
+      cursor: pointer;
+      
+      @include desktop {
+        display: none;
+      }
+    }
+  }
+}

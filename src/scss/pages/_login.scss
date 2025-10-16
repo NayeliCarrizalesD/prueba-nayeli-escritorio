@@ -1,0 +1,132 @@
+// ==========================================================================
+// PÁGINA: LOGIN
+// ==========================================================================
+
+.login-container {
+  min-height: 100vh;
+  background: $gradient-login;
+  @include center;
+  padding: $spacing-xl;
+}
+
+.login-card {
+  background: $white;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-xl;
+  padding: $spacing-xxl;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  
+  @include mobile {
+    padding: $spacing-xl;
+  }
+  
+  @include mobile-only {
+    padding: $spacing-lg;
+  }
+}
+
+.login-header {
+  margin-bottom: $spacing-xl;
+  
+  .logo {
+    margin-bottom: $spacing-lg;
+    
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: $border-radius-full;
+      border: 3px solid $primary-color;
+    }
+  }
+  
+  h1 {
+    color: $text-dark;
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-semibold;
+    margin: 0 0 $spacing-sm 0;
+    
+    @include mobile {
+      font-size: $font-size-2xl;
+    }
+  }
+  
+  p {
+    color: $text-dark;
+    font-size: $font-size-base;
+    margin: 0;
+  }
+}
+
+.login-form {
+  @include flex(column, flex-start, stretch);
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+  
+  .form-group {
+    @include form-group;
+    text-align: left;
+    
+    label {
+      color: $text-dark;
+      font-weight: $font-weight-semibold;
+      margin-bottom: $spacing-sm;
+      font-size: $font-size-sm;
+    }
+    
+    input {
+      @include input-dark;
+      padding: $spacing-md;
+      font-size: $font-size-base;
+    }
+  }
+  
+  .error-message {
+    background: #fee;
+    border: 1px solid #fcc;
+    border-radius: $border-radius-sm;
+    padding: $spacing-sm;
+    color: #c33;
+    font-size: $font-size-sm;
+    text-align: center;
+    margin-bottom: $spacing-md;
+  }
+  
+  .login-btn {
+    @include button-primary;
+    font-size: $font-size-base;
+    padding: $spacing-md $spacing-xl;
+    
+    @include mobile {
+      padding: $spacing-sm $spacing-lg;
+      font-size: $font-size-base;
+    }
+  }
+}
+
+.login-footer {
+  border-top: 1px solid $gray-200;
+  padding-top: $spacing-lg;
+  
+  .demo-credentials {
+    background: $gray-100;
+    border-radius: $border-radius-md;
+    padding: $spacing-md;
+    text-align: left;
+    
+    h4 {
+      color: $text-dark;
+      font-size: $font-size-sm;
+      margin: 0 0 $spacing-sm 0;
+      text-align: center;
+    }
+    
+    p {
+      color: $text-dark;
+      font-size: $font-size-xs;
+      margin: $spacing-xs 0;
+      font-family: $font-family-mono;
+    }
+  }
+}
