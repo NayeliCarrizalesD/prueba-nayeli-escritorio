@@ -87,46 +87,48 @@ function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
             </h3>
             
             <div className="weight-questions">
-              <div className="question-item">
-                <label>¿Cuál es tu peso ideal?</label>
-                <div className="input-with-unit">
-                  <input
-                    type="number"
-                    name="currentWeight"
-                    value={formData.currentWeight}
-                    onChange={handleInputChange}
-                    step="0.1"
-                  />
-                  <span className="unit">kg</span>
+              <div className="weight-questions-row">
+                <div className="question-item">
+                  <label>¿Cuál es tu peso ideal?</label>
+                  <div className="input-with-unit">
+                    <input
+                      type="number"
+                      name="currentWeight"
+                      value={formData.currentWeight}
+                      onChange={handleInputChange}
+                      step="0.1"
+                    />
+                    <span className="unit">kg</span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="question-item">
-                <label>¿Cuánto mides?</label>
-                <div className="input-with-unit">
-                  <input
-                    type="number"
-                    name="height"
-                    value={formData.height}
-                    onChange={handleInputChange}
-                    placeholder="0"
-                  />
-                  <span className="unit">cm</span>
+                <div className="question-item">
+                  <label>¿Cuánto mides?</label>
+                  <div className="input-with-unit">
+                    <input
+                      type="number"
+                      name="height"
+                      value={formData.height}
+                      onChange={handleInputChange}
+                      placeholder="0"
+                    />
+                    <span className="unit">cm</span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="question-item">
-                <label>¿Cuál es tu peso ideal?</label>
-                <div className="input-with-unit">
-                  <input
-                    type="number"
-                    name="idealWeight"
-                    value={formData.idealWeight}
-                    onChange={handleInputChange}
-                    placeholder="0.00"
-                    step="0.1"
-                  />
-                  <span className="unit">kg</span>
+                <div className="question-item">
+                  <label>¿Cuál es tu peso ideal?</label>
+                  <div className="input-with-unit">
+                    <input
+                      type="number"
+                      name="idealWeight"
+                      value={formData.idealWeight}
+                      onChange={handleInputChange}
+                      placeholder="0.00"
+                      step="0.1"
+                    />
+                    <span className="unit">kg</span>
+                  </div>
                 </div>
               </div>
             </div>
