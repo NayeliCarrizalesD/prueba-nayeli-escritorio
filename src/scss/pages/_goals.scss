@@ -1,18 +1,18 @@
 // ==========================================================================
-// PÁGINA: GOALS - Migrado de Goals.css con SASS
+// PÁGINA: GOALS - NUEVO DISEÑO CON VARIABLES CSS
 // ==========================================================================
 
 // Cuando Goals está dentro del main-content (con navbar)
 .main-content .goals-container {
   min-height: calc(100vh - 80px); // Resta la altura del navbar
-  background: #f8f9fa;
+  background: white;
   padding-top: 2rem; // Espacio entre navbar y contenido
 }
 
 // Cuando Goals está como página completa (sin navbar)
 .goals-container {
   min-height: 100vh;
-  background: #f8f9fa;
+  background: white;
 }
 
 .goals-content {
