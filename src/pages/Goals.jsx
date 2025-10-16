@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import PageHeader from '../components/PageHeader'
 import { 
   FaWeight, 
   FaTruck, 
@@ -10,8 +11,7 @@ import {
   FaRunning, 
   FaClock, 
   FaClipboardList,
-  FaSave,
-  FaUser
+  FaSave
 } from 'react-icons/fa'
 
 function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
@@ -76,22 +76,9 @@ function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
 
   return (
     <div className="goals-container">
-      {/* Sección de bienvenida similar a Home */}
-      <div className="goals-welcome-section">
-        <div className="welcome-content">
-          <div className="avatar">
-            <div className="avatar-icon">
-              <FaUser />
-            </div>
-          </div>
-          <div className="welcome-text">
-            <div className="h3">¡Bienvenida</div>
-            <div className="h2">{userName}!</div>
-          </div>
-        </div>
-      </div>
-
       <div className="goals-content">
+        <PageHeader userName={userName} indicators={progressIndicators} />
+
         <form className="goals-form" onSubmit={handleSubmit}>
           <div className="objectives-section">
             <h3 className="section-title">
