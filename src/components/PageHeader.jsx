@@ -19,6 +19,7 @@ function PageHeader({
           <div className="welcome-text">
             <div className="h3">¡Bienvenida</div>
             <div className="h2">{userName}!</div>
+            <p className="parrafo description">{description}</p>
           </div>
         </div>
       </div>
