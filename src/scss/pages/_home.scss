@@ -226,11 +226,12 @@
         padding: 0.5rem;
         border-radius: 4px;
         transition: all 0.3s ease;
-        border: 2px solid transparent;
+        border: none;
+        border-bottom: 2px solid #FFD61B;
         
         &:hover {
           background-color: rgba(255, 214, 27, 0.1);
-          border-color: rgba(255, 214, 27, 0.3);
+          border-bottom-color: #F7B733;
           transform: translateY(-1px);
         }
         
