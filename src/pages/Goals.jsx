@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PageHeader from '../components/PageHeader'
 import { 
   FaWeight, 
   FaTruck, 
@@ -11,10 +10,11 @@ import {
   FaRunning, 
   FaClock, 
   FaClipboardList,
-  FaSave 
+  FaSave,
+  FaUser
 } from 'react-icons/fa'
 
-function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
+function Goals({ userName = "Oscar Adan", onComplete, onLogout }) {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     currentWeight: '72.0',
@@ -76,62 +76,76 @@ function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
 
   return (
     <div className="goals-container">
-      <div className="goals-content">
-        <PageHeader userName={userName} indicators={progressIndicators} />
+      {/* Sección de bienvenida similar a Home */}
+      <div className="goals-welcome-section">
+        <div className="welcome-content">
+          <div className="avatar">
+            <div className="avatar-icon">
+              <FaUser />
+            </div>
+          </div>
+          <div className="welcome-text">
+            <div className="h3">Nutrición</div>
+            <div className="h1">Hola, {userName}</div>
+          </div>
+        </div>
+      </div>
 
+      <div className="goals-content">
         <form className="goals-form" onSubmit={handleSubmit}>
-          <div className="section">
-            <h3><FaChartBar style={{ marginRight: '8px' }} />Objetivos</h3>
+          <div className="objectives-section">
+            <h3 className="section-title">
+              <FaChartBar className="icon" />
+              Objetivos
+            </h3>
             
             <div className="weight-questions">
-              <div className="question-group">
-                <div className="question-item">
-                  <label>¿Cuál es tu peso ideal?</label>
-                  <div className="input-with-unit">
-                    <input
-                      type="number"
-                      name="currentWeight"
-                      value={formData.currentWeight}
-                      onChange={handleInputChange}
-                      step="0.1"
-                    />
-                    <span className="unit">kg</span>
-                  </div>
+              <div className="question-item">
+                <label>¿Cuál es tu peso ideal?</label>
+                <div className="input-with-unit">
+                  <input
+                    type="number"
+                    name="currentWeight"
+                    value={formData.currentWeight}
+                    onChange={handleInputChange}
+                    step="0.1"
+                  />
+                  <span className="unit">kg</span>
                 </div>
+              </div>
 
-                <div className="question-item">
-                  <label>¿Cuánto mides?</label>
-                  <div className="input-with-unit">
-                    <input
-                      type="number"
-                      name="height"
-                      value={formData.height}
-                      onChange={handleInputChange}
-                      placeholder="0"
-                    />
-                    <span className="unit">cm</span>
-                  </div>
+              <div className="question-item">
+                <label>¿Cuánto mides?</label>
+                <div className="input-with-unit">
+                  <input
+                    type="number"
+                    name="height"
+                    value={formData.height}
+                    onChange={handleInputChange}
+                    placeholder="0"
+                  />
+                  <span className="unit">cm</span>
                 </div>
+              </div>
 
-                <div className="question-item">
-                  <label>¿Cuál es tu peso ideal?</label>
-                  <div className="input-with-unit">
-                    <input
-                      type="number"
-                      name="idealWeight"
-                      value={formData.idealWeight}
-                      onChange={handleInputChange}
-                      placeholder="0.00"
-                      step="0.1"
-                    />
-                    <span className="unit">kg</span>
-                  </div>
+              <div className="question-item">
+                <label>¿Cuál es tu peso ideal?</label>
+                <div className="input-with-unit">
+                  <input
+                    type="number"
+                    name="idealWeight"
+                    value={formData.idealWeight}
+                    onChange={handleInputChange}
+                    placeholder="0.00"
+                    step="0.1"
+                  />
+                  <span className="unit">kg</span>
                 </div>
               </div>
             </div>
 
             <div className="goal-selection">
-              <label>¿Qué buscas al mejorar tu alimentación?</label>
+              <label className="question-label">¿Qué buscas al mejorar tu alimentación?</label>
               <div className="goals-grid">
                 {goals.map(goal => (
                   <div 
@@ -183,7 +197,6 @@ function Goals({ userName = "Nayeli Carrizales", onComplete, onLogout }) {
             <div className="save-progress">
               <span>Deseo continuar después,</span>
               <button type="button" onClick={handleSaveProgress} className="save-btn">
-                <FaSave style={{ marginRight: '8px' }} />
                 Guardar mi avance
               </button>
             </div>
